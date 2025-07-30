@@ -1,10 +1,14 @@
 import { mailService } from "../services/mail.service.js"
 import { MailList } from "../cmps/MailList.jsx"
+import { MailDetails } from "./MailDetails.jsx"
 
 const { useState, useEffect } = React
+const { Link, Outlet } = ReactRouterDOM
 
 export function MailIndex() {
     const [mails, setMails] = useState(null)
+    const [readCount, setReadCount] = useState(0)
+    const [selectedMailId, setMailId] = useState(null)
 
     useEffect(() => {
         loadMails()
@@ -12,20 +16,38 @@ export function MailIndex() {
 
     function loadMails() {
         mailService.query()
-            .then(mails => setMails(mails))
+            .then(mails => {
+                setMails(mails)
+            })
             .catch(err => console.log('err:', err))
     }
 
-    function markAsRead(mailId) {
-        setMails(prevMails =>
-            prevMails.map(mail =>
-                mail.id === mailId ? { ...mail, isRead: true } : mail
-            )
-        )
+    useEffect(() => {
+        if (Array.isArray(mails)) updateReadCount(mails)
+    })
 
-        const mail = mails.find(mail => mail.id === mailId)
-        if (mail && !mail.isRead) {
-            const updatedMail = { ...mail, isRead: true }
+    function updateReadCount() {
+        if (!Array.isArray(mails)) return
+        const count = mails.filter(mail => !mail.isRead).length
+        setReadCount(count)
+    }
+
+    function markAsRead(mailId) {
+        let updatedMail = null
+
+        const updatedMails = mails.map(mail => {
+            if (mail.id === mailId && !mail.isRead) {
+                updatedMail = { ...mail, isRead: true }
+                return updatedMail
+            } else {
+                return mail
+            }
+        })
+
+        setMails(updatedMails)
+        // updateReadCount(updatedMails)
+
+        if (updatedMail) {
             mailService.save(updatedMail)
         }
     }
@@ -35,8 +57,9 @@ export function MailIndex() {
     return (
         <section className="container">
             <h1>Mail app</h1>
-            {mails && <MailList mails={mails} onRead={markAsRead} />}
+            <p>{readCount} Mails read</p>
+            {selectedMailId && <MailDetails mailId={selectedMailId} setMailId = {setMailId} />}
+            {!selectedMailId && <MailList mails={mails} onRead={markAsRead} setMailId = {setMailId} />}
         </section>
     )
 }
-

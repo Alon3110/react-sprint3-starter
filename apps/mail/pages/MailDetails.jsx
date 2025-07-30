@@ -3,12 +3,10 @@ import { mailService } from "../services/mail.service.js"
 const { useState, useEffect } = React
 const { useParams, useNavigate, Link } = ReactRouterDOM
 
-export function MailDetails() {
-
-    const { mailId } = useParams()
-    const navigate = useNavigate()
+export function MailDetails({ mailId, setMailId }) {
 
     const [mail, setMail] = useState(null)
+    const navigate = useNavigate()
 
     useEffect(() => {
         loadMail()
@@ -23,7 +21,7 @@ export function MailDetails() {
     if (!mail) return <div>Loading...</div>
 
     return (
-       <section className="gmail-message">
+        <section className="gmail-message">
             <header className="gmail-message-header">
                 <span className="email-subject">{mail.subject}</span>
                 <p className="email-sender">{mail.from}</p>
@@ -36,6 +34,8 @@ export function MailDetails() {
 
             <footer className="gmail-message-footer">
                 <p className="email-footer-info">This message sent to: {mail.to}, from {mail.from}</p>
+                <button onClick={() => setMailId(null)}>Back</button>
+
             </footer>
         </section>
     )
