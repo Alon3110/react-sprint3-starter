@@ -4,9 +4,9 @@ import { NotePreview } from "../cmps/NotePreview.jsx"
 export function NoteList({ notes }) {
 
     if (!notes) return <div className="loader">Loading...</div>
-    return <section>
+    return <section className="notes-container">
         {notes.map(note => (
-    <div key={note.id} className="notes-container">
+    <div key={note.id}>
         <NotePreview note={note} />
     </div>
 ))}
