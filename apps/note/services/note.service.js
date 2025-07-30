@@ -36,8 +36,18 @@ function save(note) {
     }
 }
 
-function getEmptyNote(type = '', title = '') {
-    return { type, title }
+function getEmptyNote(type = 'NoteTxt') {    
+    return    {
+        type,
+        isPinned: false,
+        style: {
+            backgroundColor: '#00d'
+        },
+        info: {
+            title: '',
+            txt: '',
+        }
+    }
 }
 
 function _createNotes() { 
