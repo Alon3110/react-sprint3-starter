@@ -1,15 +1,22 @@
-.mail-preview {
 
+.cell {
+    background-color: white;
+    padding: 1em;
+    margin-bottom: 0.5em;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s;
 }
 
-.cell{
-    display: flex;
-    gap: 10px;
-    border: 1px solid black;
-    align-items: center;
-    background-color: rgb(234, 234, 234);
+.cell.read {
+    background-color: #f0f0f0;
 }
 
 .cell h2 {
     margin-left: 20px;
+}
+
+.details {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }

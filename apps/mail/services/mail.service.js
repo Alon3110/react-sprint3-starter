@@ -21,16 +21,16 @@ export const mailService = {
 
 function query(filterBy = {}) {
     return storageService.query(MAIL_KEY)
-        // .then(mails => {
-        //     if (filterBy.txt) {
-        //         const regExp = new RegExp(filterBy.txt, 'i')
-        //         mails = mails.filter(mail => regExp.test(mail.title))
-        //     }
-        //     if (filterBy.price) {
-        //         mails = mails.filter(mail => mail.listPrice.amount >= +filterBy.price)
-        //     }
-        //     return mails
-        // })
+    .then(mails => {
+        if (filterBy.txt) {
+            const regExp = new RegExp(filterBy.txt, 'i')
+            mails = mails.filter(mail => regExp.test(mail.title))
+        }
+        if (filterBy.price) {
+            mails = mails.filter(mail => mail.listPrice.amount >= +filterBy.price)
+        }
+        return mails
+    })
 }
 
 function get(mailId) {

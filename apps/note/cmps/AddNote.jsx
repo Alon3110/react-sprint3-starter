@@ -2,7 +2,7 @@ import { noteService } from "../services/note.service.js"
 
 const { useState } = React
 
-export function AddNote({onSaveNote}) {
+export function AddNote({ onSaveNote }) {
 
     const [noteToSave, setNote] = useState(noteService.getEmptyNote())
 
