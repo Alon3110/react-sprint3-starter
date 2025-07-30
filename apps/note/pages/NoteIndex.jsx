@@ -4,7 +4,7 @@ import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.servic
 import { AddNote } from "../cmps/AddNote.jsx"
 
 const { useState, useEffect } = React
-
+// just to save something to branch
 export function NoteIndex() {
 
     const [notes, setNotes] = useState(null)
