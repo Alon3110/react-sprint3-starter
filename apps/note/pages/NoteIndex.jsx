@@ -20,7 +20,7 @@ export function NoteIndex() {
                 showErrorMsg('Cannot get notes!')
             })
     }
-
+// 
     if (!notes) return <div className="loader">Loading...</div>
     return (
         <section className="note-index">
