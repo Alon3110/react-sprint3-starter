@@ -1,1 +1,23 @@
- /* note list */
+.notes-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 1rem;
+    gap: 1rem;
+}
+
+.btn-add-note {
+    display: grid;
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 0.5rem;
+    border: none;
+
+    background-color: var(--bg1);
+    font-size: 2rem;
+
+    inset-inline-end: 15px;
+    inset-block-end: 40px;
+
+    place-items: center;
+}
