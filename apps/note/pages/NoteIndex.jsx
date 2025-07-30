@@ -37,7 +37,7 @@ export function NoteIndex() {
     if (!notes) return <div className="loader">Loading...</div>
     return (
         <section className="note-index">
-            <DynamicCmp cmpType={cmpType} onSaveNote={onSaveNote}/>
+            <DynamicCmp cmpType={cmpType} onSaveNote={onSaveNote} />
             <section style={{ marginTop: '10px' }} className="container">
             </section>
             <NoteList notes={notes} />
