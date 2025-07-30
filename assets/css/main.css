@@ -1,16 +1,17 @@
 
+/* BASIS */
 @import './basics/vars.css';
 @import './basics/base.css';
 @import './basics/helpers.css';
 @import './basics/layout.css';
 
+/* COMPONENT */
 @import './cmps/Home.css';
 @import './cmps/UserMsg.css';
 @import './cmps/AppHeader.css';
 
 /* mail */
-@import './apps/mail/MailIndex.css';
-@import './apps/mail/MailList.css';
+@import '../css/apps/mail/mail.css';
 
 /* note */
 @import './apps/note/NoteIndex.css';
