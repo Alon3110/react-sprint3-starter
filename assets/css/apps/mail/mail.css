@@ -1,0 +1,9 @@
+/* COMPONENTS */
+@import '../../../css/apps/mail/cmps/mail-list.css';
+@import '../../../css/apps/mail/cmps/add-mail.css';
+@import '../../../css/apps/mail/cmps/mail-filter.css';
+@import '../../../css/apps/mail/cmps/user-msg.css';
+@import '../../../css/apps/mail/cmps/mail-preview.css';
+
+/* PAGES */
+@import '../../../css/apps/mail/pages/mail-index.css';

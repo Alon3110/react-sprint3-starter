@@ -1,0 +1,15 @@
+.mail-preview {
+
+}
+
+.cell{
+    display: flex;
+    gap: 10px;
+    border: 1px solid black;
+    align-items: center;
+    background-color: rgb(234, 234, 234);
+}
+
+.cell h2 {
+    margin-left: 20px;
+}
