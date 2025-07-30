@@ -19,21 +19,6 @@ function query() {
     return storageService.query(NOTE_KEY)
 }
 
-// function query(filterBy = {}) {
-//     return storageService.query(NOTE_KEY)
-//         .then(notes => {
-//             if (filterBy.txt) {
-//                 const regExp = new RegExp(filterBy.txt, 'i')
-//                 notes = notes.filter(note => regExp.test(note.type))
-//             }
-//             if (filterBy.title) {
-//                 notes = notes.filter(note => note.title >= filterBy.title)
-//             }
-//             console.log(' notes:', notes)
-//             return notes
-//         })
-// }
-
 function get(noteId) {
     return storageService.get(NOTE_KEY, noteId).then(_setNextPrevNoteId)
 }
@@ -55,9 +40,9 @@ function getEmptyNote(type = '', title = '') {
     return { type, title }
 }
 
-function _createNotes() {
-    
+function _createNotes() { 
     let notes = utilService.loadFromStorage(NOTE_KEY)
+    
     if (!notes || !notes.length) {
         notes = demoData        
         utilService.saveToStorage(NOTE_KEY, notes)
