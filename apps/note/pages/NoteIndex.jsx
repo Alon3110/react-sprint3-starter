@@ -59,4 +59,10 @@ export function NoteIndex() {
             <NoteList notes={notes} onRemoveNote={onRemoveNote} onSetNoteColor={onSetNoteColor} />
         </section>
     )
+    // return (
+    //     <section className="note-index">
+    //         <AddNote setNotes={setNotes} />
+    //         <NoteList notes={notes} onRemoveNote={onRemoveNote} onSetNoteColor={onSetNoteColor} />
+    //     </section>
+    // )
 }
