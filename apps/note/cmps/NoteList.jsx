@@ -7,8 +7,7 @@ export function NoteList({ notes, onRemoveNote }) {
     return (<section className="notes-container">
         {notes.map(note => (
             <div key={note.id}>
-                <DynamicCmp note={note} />
-                <button onClick={() => onRemoveNote(note.id)}>X</button>
+                <DynamicCmp note={note} onRemoveNote={onRemoveNote} />
             </div>
         ))}
         {/* <button className="btn-add-note" onClick={toggleAddNote}>+</button> */}
