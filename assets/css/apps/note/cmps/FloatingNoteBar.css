@@ -1,0 +1,43 @@
+.floating-note-bar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.note-title-input {
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  margin-bottom: 8px;
+}
+
+.note-textarea {
+  width: 100%;
+  resize: none;
+  font-size: 14px;
+  border: none;
+  outline: none;
+}
+
+.note-actions {
+  text-align: right;
+  margin-top: 8px;
+}
+
+.note-actions button {
+  padding: 6px 12px;
+  background-color: #fbbc04;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}

@@ -56,7 +56,6 @@ export function AddNote({ setNotes }) {
 
     return (
         <section>
-
             {noteType === 'NoteTxt' && <form onSubmit={onSaveNote} className="new-note-form">
                 <div>
                     <input
