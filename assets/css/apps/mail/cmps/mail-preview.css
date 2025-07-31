@@ -1,6 +1,11 @@
+.content {
+    display: flex;
+}
+
 .details {
     flex: 1;
     display: flex;
+    /* justify-content: space-around; */
     gap: 1.25rem;
     color: var(--color-primary-txt);
     font-family: Arial, sans-serif;
@@ -39,7 +44,6 @@ button.close {
     cursor: pointer;
     font-size: 16px;
     padding: 6px;
-    margin-left: 12px;
     transition: color 0.2s ease;
 }
 

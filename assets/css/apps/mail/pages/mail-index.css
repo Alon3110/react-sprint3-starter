@@ -16,7 +16,7 @@
     color: var(--color-secondary-txt);
 }
 
-.container button {
+.compose-btn {
     background-color: var(--bg-compose-btn);
     color: white;
     border: none;

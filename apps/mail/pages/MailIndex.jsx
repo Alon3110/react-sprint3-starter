@@ -79,7 +79,7 @@ export function MailIndex() {
         <section className="container">
             <h1>Mail app</h1>
             <p>{readCount} Mails to read</p>
-            <button onClick={() => setAddNewMail(true)}>Compose</button>
+            <button className="compose-btn" onClick={() => setAddNewMail(true)}>Compose</button>
             {selectedMailId && <MailDetails mailId={selectedMailId} setMailId={setMailId} />}
             {!selectedMailId && <MailList mails={mails} onRead={markAsRead} onRemove={removeMail} setMailId={setMailId} />}
             {addNewMail && (<MailEdit onClose={() => setAddNewMail(false)} onSend={handleSendMail} />)}
