@@ -1,6 +1,7 @@
 /* COMPONENTS */
 @import './cmps/mail-list.css';
 @import './cmps/mail-preview.css';
+@import './cmps/add-mail.css';
 @import './pages/mail-index.css';
 
 /* PAGES */

@@ -1,0 +1,11 @@
+.compose-modal {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 400px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #aaa;
+    padding: 1rem;
+    z-index: 1000;
+}
