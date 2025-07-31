@@ -19,7 +19,7 @@ export function AddMail({ onSubmit }) {
             <input name="to" placeholder="To" required />
             <input name="subject" placeholder="Subject" required />
             <textarea name="body" placeholder="Body"></textarea>
-            <button type="submit">Send</button>
+            <button className="save-mail-btn" type="submit">Send</button>
         </form>
     )
 }
