@@ -4,26 +4,22 @@
     padding: 0;
 }
 
-/* body {
-    margin: 0;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    margin: 0;
-} */
-
 a {
     text-decoration: none;
     color: inherit;
 }
 
-img {
+img:not(.btns-app) {
     height: 100%;
     width: 100%;
     object-fit: cover;
+}
+
+img .btns-app {
+    height: 0.5rem;
+    width: 0.5rem;
+}
+
+.btns-app {
+    cursor: pointer;
 }

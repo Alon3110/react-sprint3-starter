@@ -13,8 +13,6 @@ export const noteService = {
     getEmptyNote,
     createTodo,
     getEmptyTodo,
-    // getDefaultFilter,
-    // getFilterFromSearchParams
 }
 
 function query() {
@@ -23,11 +21,9 @@ function query() {
 
 function get(noteId) {    
     return storageService.get(NOTE_KEY, noteId)
-    // return storageService.get(NOTE_KEY, noteId).then(_setNextPrevNoteId)
 }
 
 function remove(noteId) {
-    // return Promise.reject('Oh No!')
     return storageService.remove(NOTE_KEY, noteId)
 }
 

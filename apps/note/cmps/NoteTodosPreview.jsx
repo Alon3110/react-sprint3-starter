@@ -1,6 +1,6 @@
-import { NoteColor } from "../cmps/NoteColor.jsx"
+// import { NoteColor } from "../cmps/NoteColor.jsx"
 
-const { useState, useEffect } = React
+// const { useState, useEffect } = React
 
 export function NoteTodosPreview({ note, onRemoveNote, onSetNoteColor }) {
 
@@ -23,8 +23,10 @@ export function NoteTodosPreview({ note, onRemoveNote, onSetNoteColor }) {
             </ul>
             {/* <NoteColor onSetNoteColor={onSetNoteColor(note.id, note.style.backgroundColor)} /> */}
             {/* <button onClick={() => onToggleColorPicker()}>Change color</button> */}
-            <button onClick={() => onSetNoteColor(note.id, note.style.backgroundColor)}>Change color</button>
-            <button onClick={() => onRemoveNote(note.id)}>X</button>
+            <div className="btn-note-bar">
+                <img src="../../assets/note-svgs/colors.svg" alt="" className="btns-app" onClick={() => onSetNoteColor(note.id, note.style.backgroundColor)} />
+                <img src="../../assets/note-svgs/delete.svg" alt="" className="btns-app" onClick={() => onRemoveNote(note.id)} />
+            </div>
         </div>
     )
 }
