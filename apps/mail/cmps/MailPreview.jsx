@@ -13,7 +13,7 @@ export function MailPreview({ mail, onRemove }) {
                 ev.stopPropagation(),
                 onRemove(mail.id)
             }}
-                className='close'>Remove<i class="fa-solid fa-trash-can"></i></button>                
+                className='close'>Remove<i className="fa-solid fa-trash-can"></i></button>                
         </div>
     )
 }
