@@ -1,13 +1,14 @@
 import { NoteTxtPreview } from "./NoteTxtPreview.jsx"
 import { NoteTodosPreview } from "./NoteTodosPreview.jsx"
 
-export function NoteList({ notes }) {
+export function NoteList({ notes, onRemoveNote }) {
 
     if (!notes) return <div className="loader">Loading...</div>
     return (<section className="notes-container">
         {notes.map(note => (
             <div key={note.id}>
                 <DynamicCmp note={note} />
+                <button onClick={() => onRemoveNote(note.id)}>X</button>
             </div>
         ))}
         {/* <button className="btn-add-note" onClick={toggleAddNote}>+</button> */}
