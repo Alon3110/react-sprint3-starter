@@ -1,6 +1,6 @@
 import { MailPreview } from "./MailPreview.jsx";
 
-export function MailList({ mails, onRead, setMailId }) {
+export function MailList({ mails, onRead, onRemove, setMailId }) {
 
     return (
         <article className="mail-list">
@@ -14,7 +14,8 @@ export function MailList({ mails, onRead, setMailId }) {
                             onRead(mail.id)
                         }}
                     >
-                        <MailPreview mail={mail} />
+                        <MailPreview mail={mail} onRemove={onRemove} />
+
                     </li>
                 ))}
             </ul>

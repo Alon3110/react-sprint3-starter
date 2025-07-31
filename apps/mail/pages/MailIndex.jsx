@@ -2,6 +2,7 @@ import { mailService } from "../services/mail.service.js"
 import { MailList } from "../cmps/MailList.jsx"
 import { MailDetails } from "./MailDetails.jsx"
 import { MailEdit } from "./MailEdit.jsx"
+import { showSuccessMsg, showErrorMsg } from "../../../services/event-bus.service.js"
 
 const { useState, useEffect } = React
 const { Link, Outlet } = ReactRouterDOM
@@ -11,7 +12,6 @@ export function MailIndex() {
     const [readCount, setReadCount] = useState(0)
     const [selectedMailId, setMailId] = useState(null)
     const [addNewMail, setAddNewMail] = useState(false)
-
 
     useEffect(() => {
         loadMails()
@@ -33,6 +33,18 @@ export function MailIndex() {
         if (!Array.isArray(mails)) return
         const count = mails.filter(mail => !mail.isRead).length
         setReadCount(count)
+    }
+
+    function removeMail(mailId) {
+        mailService.remove(mailId)
+            .then(() => {
+                setMails(prevMails => prevMails.filter(mail => mailId !== mail.id))
+                showSuccessMsg('Mail has been successfully removed!')
+            })
+            .catch(() => {
+                showErrorMsg(`couldn't remove book`)
+                navigate('/book')
+            })
     }
 
     function markAsRead(mailId) {
@@ -69,7 +81,7 @@ export function MailIndex() {
             <p>{readCount} Mails to read</p>
             <button onClick={() => setAddNewMail(true)}>Compose</button>
             {selectedMailId && <MailDetails mailId={selectedMailId} setMailId={setMailId} />}
-            {!selectedMailId && <MailList mails={mails} onRead={markAsRead} setMailId={setMailId} />}
+            {!selectedMailId && <MailList mails={mails} onRead={markAsRead} onRemove={removeMail} setMailId={setMailId} />}
             {addNewMail && (<MailEdit onClose={() => setAddNewMail(false)} onSend={handleSendMail} />)}
         </section>
     )

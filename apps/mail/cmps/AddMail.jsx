@@ -12,7 +12,6 @@ export function AddMail({ onSubmit }) {
             isRead: false,
             from: 'me@appsus.com'
         }
-
         onSubmit(mail)
     }
     return (
