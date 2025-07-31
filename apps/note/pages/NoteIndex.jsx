@@ -7,7 +7,6 @@ const { useState, useEffect } = React
 export function NoteIndex() {
 
     const [notes, setNotes] = useState(null)
-    const [cmpType, setCmpType] = useState('NoteTxt')
 
     useEffect(() => {
         loadNotes()
@@ -22,32 +21,31 @@ export function NoteIndex() {
             })
     }
 
-    function onSaveNote(noteToSave) {
-        noteService.createdAt = Date.now()
-        noteService.save(noteToSave)
-            .then(savedNote => {
-                setNotes(prevNotes => [...prevNotes, savedNote])
+    function onRemoveNote(noteId) {
+        noteService.remove(noteId)
+            .then(() => {
+                setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
+                showSuccessMsg(`Note removed successfully!`)
             })
             .catch(err => {
-                console.log('Cannot save note!:', err)
-                showErrorMsg('Cannot save note!')
+                console.log('Error deleting note:', err)
+                showErrorMsg('Error deleting note!')
             })
     }
 
     if (!notes) return <div className="loader">Loading...</div>
     return (
         <section className="note-index">
-            <DynamicCmp cmpType={cmpType} onSaveNote={onSaveNote} />
-            <section style={{ marginTop: '10px' }} className="container">
-            </section>
-            <NoteList notes={notes} />
+            <AddNote setNotes={setNotes} />
+            <NoteList notes={notes} onRemoveNote={onRemoveNote}/>
         </section>
     )
 }
 
-function DynamicCmp(props) {
-    const dynamicCmpMap = {
-        NoteTxt: <AddNote {...props} />
-    }
-    return dynamicCmpMap[props.cmpType]
-}
+// function DynamicCmp(props) {
+//     const dynamicCmpMap = {
+//         NoteTxt: <AddNote {...props} />,
+//         NoteTodos: <AddTodosNote {...props} />,
+//     }
+//     return dynamicCmpMap[props.cmpType]
+// }

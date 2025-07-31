@@ -28,11 +28,10 @@ export const demoData = [
     {
         id: 'n103',
         createdAt: 1112224,
-        type: 'NoteTxt',
+        type: 'NoteTodo',
         isPinned: false,
         info: {
             title: 'Get my stuff together',
-            txt: '3rd note',
             todos: [
                 { txt: 'Driving license', doneAt: null },
                 { txt: 'Coding power', doneAt: 187111111 },
