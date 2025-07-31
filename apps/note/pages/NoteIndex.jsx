@@ -8,8 +8,6 @@ const { useState, useEffect } = React
 export function NoteIndex() {
 
     const [notes, setNotes] = useState(null)
-    const [noteToSave, setNote] = useState(noteService.getEmptyNote())
-    const [cmpType, setCmpType] = useState('NoteTxt')
 
     useEffect(() => {
         loadNotes()
@@ -24,57 +22,31 @@ export function NoteIndex() {
             })
     }
 
-    function addNote(ev) {
-        ev.preventDefault()
-        onSaveNote(noteToSave)
-    }
-
-    function handleChange({ target }) {
-        const { name: field, type } = target
-        const value = type === 'number' ? +target.value : target.value
-        setNote((prevNote) => ({ ...prevNote, info: { ...prevNote.info, [field]: value } }))
-    }
-
-    function onSaveNote(noteToSave) {
-        noteToSave.createdAt = Date.now()
-        noteService.save(noteToSave)
-            .then(savedNote => {
-                setNotes(prevNotes => [...prevNotes, savedNote])
+    function onRemoveNote(noteId) {
+        noteService.remove(noteId)
+            .then(() => {
+                setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
+                showSuccessMsg(`Note removed successfully!`)
             })
             .catch(err => {
-                console.log('Cannot save note!:', err)
-                showErrorMsg('Cannot save note!')
+                console.log('Error deleting note:', err)
+                showErrorMsg('Error deleting note!')
             })
     }
 
     if (!notes) return <div className="loader">Loading...</div>
     return (
         <section className="note-index">
-            <form onSubmit={addNote} className="new-note-form">
-                <div className='review-modal'>
-                    <input
-                        onChange={handleChange}
-                        type='text'
-                        id='title'
-                        name='title'
-                        size='10'
-                        placeholder="Note Title"
-                    />
-                    <DynamicCmp cmpType={cmpType} handleChange={handleChange} />
-                    <section style={{ marginTop: '10px' }} className="container">
-                    </section>
-                    <button>Save</button>
-                </div>
-            </form>
+            <AddNote setNotes={setNotes} />
             <NoteList notes={notes} />
         </section>
     )
 }
 
-function DynamicCmp(props) {
-    const dynamicCmpMap = {
-        NoteTxt: <AddNote {...props} />,
-        NoteTodos: <AddTodosNote {...props} />,
-    }
-    return dynamicCmpMap[props.cmpType]
-}
+// function DynamicCmp(props) {
+//     const dynamicCmpMap = {
+//         NoteTxt: <AddNote {...props} />,
+//         NoteTodos: <AddTodosNote {...props} />,
+//     }
+//     return dynamicCmpMap[props.cmpType]
+// }

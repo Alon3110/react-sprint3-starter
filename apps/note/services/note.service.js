@@ -1,6 +1,6 @@
 import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/async-storage.service.js'
-import {demoData} from '../demoData.js'
+import { demoData } from '../demoData.js'
 
 const NOTE_KEY = 'noteDB'
 _createNotes()
@@ -11,6 +11,8 @@ export const noteService = {
     remove,
     save,
     getEmptyNote,
+    createTodo,
+    getEmptyTodo,
     // getDefaultFilter,
     // getFilterFromSearchParams
 }
@@ -36,28 +38,59 @@ function save(note) {
     }
 }
 
-function getEmptyNote(type = 'NoteTxt') {    
-    return    {
-        type,
+function getEmptyNote(type) {
+    // add if for every note type
+    if (type === 'NoteTxt') {
+        return {
+            type,
+            isPinned: false,
+            style: {
+                backgroundColor: '#00d'
+            },
+            info: {
+                title: '',
+                txt: '',
+            }
+        }
+    } else if (type === 'NoteTodo') {
+        return ''
+    }
+}
+
+function createTodo(tasks) {
+    return tasks.map(task => {
+        return { txt: task, doneAt: null }
+    })
+}
+
+function getEmptyTodo() {
+    return {
+        type: 'NoteTodo',
         isPinned: false,
-        style: {
-            backgroundColor: '#00d'
-        },
         info: {
             title: '',
-            txt: '',
+            todos: [
+            ]
         }
     }
 }
 
-function _createNotes() { 
+function _createNotes() {
     let notes = utilService.loadFromStorage(NOTE_KEY)
-    
+
     if (!notes || !notes.length) {
-        notes = demoData        
+        notes = demoData
         utilService.saveToStorage(NOTE_KEY, notes)
     }
 }
 
+// NoteTodos
 
+function _createTodo(txt) {
+    return {
+        id: makeId(),
+        txt,
+        isActive: true,
+    }
+}
 

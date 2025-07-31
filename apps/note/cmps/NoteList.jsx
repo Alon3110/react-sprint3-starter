@@ -1,4 +1,5 @@
-import { NotePreview } from "../cmps/NotePreview.jsx"
+import { NoteTxtPreview } from "./NoteTxtPreview.jsx"
+import { NoteTodosPreview } from "./NoteTodosPreview.jsx"
 
 export function NoteList({ notes }) {
 
@@ -6,9 +7,17 @@ export function NoteList({ notes }) {
     return (<section className="notes-container">
         {notes.map(note => (
             <div key={note.id}>
-                <NotePreview note={note} />
+                <DynamicCmp note={note} />
             </div>
         ))}
         {/* <button className="btn-add-note" onClick={toggleAddNote}>+</button> */}
     </section>)
+}
+
+function DynamicCmp(props) {
+    const dynamicCmpMap = {
+        NoteTxt: <NoteTxtPreview {...props} />,
+        NoteTodo: <NoteTodosPreview {...props} />,
+    }
+    return dynamicCmpMap[props.note.type]
 }

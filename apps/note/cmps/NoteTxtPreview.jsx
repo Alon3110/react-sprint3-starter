@@ -1,4 +1,4 @@
-export function NotePreview({ note }) {
+export function NoteTxtPreview({ note }) {
 
     const { info } = note
     return (
