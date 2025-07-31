@@ -1,4 +1,4 @@
-export function NoteColor({setNoteColor, backgroundColor }) {
+export function NoteColor({onSetNoteColor, backgroundColor }) {
 
     console.log('backgroundColor:', backgroundColor)
     const colors = [
@@ -11,7 +11,7 @@ export function NoteColor({setNoteColor, backgroundColor }) {
     ]
 
     function onSetColor(color) {
-        setNoteColor({ backgroundColor: color })
+        onSetNoteColor({ backgroundColor: color })
     }
 
     return (

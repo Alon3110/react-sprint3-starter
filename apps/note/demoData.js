@@ -17,19 +17,22 @@ export const demoData = [
         createdAt: 1112223,
         type: 'NoteTxt',
         isPinned: false,
+        style: {
+            backgroundColor: '#00d'
+        },
         info: {
             title: 'Bobi and Me',
             url: 'http://some-img/me',
         },
-        style: {
-            backgroundColor: '#00d'
-        }
     },
     {
         id: 'n103',
         createdAt: 1112224,
         type: 'NoteTodo',
         isPinned: false,
+        style: {
+            backgroundColor: '#00d'
+        },
         info: {
             title: 'Get my stuff together',
             todos: [

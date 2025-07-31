@@ -21,8 +21,9 @@ function query() {
     return storageService.query(NOTE_KEY)
 }
 
-function get(noteId) {
-    return storageService.get(NOTE_KEY, noteId).then(_setNextPrevNoteId)
+function get(noteId) {    
+    return storageService.get(NOTE_KEY, noteId)
+    // return storageService.get(NOTE_KEY, noteId).then(_setNextPrevNoteId)
 }
 
 function remove(noteId) {
