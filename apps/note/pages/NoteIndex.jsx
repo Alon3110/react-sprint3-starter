@@ -33,6 +33,10 @@ export function NoteIndex() {
             })
     }
 
+    function setNoteColor(notes, color) {
+        const noteColor = notes.map(note )
+    }
+
     if (!notes) return <div className="loader">Loading...</div>
     return (
         <section className="note-index">
@@ -41,11 +45,3 @@ export function NoteIndex() {
         </section>
     )
 }
-
-// function DynamicCmp(props) {
-//     const dynamicCmpMap = {
-//         NoteTxt: <AddNote {...props} />,
-//         NoteTodos: <AddTodosNote {...props} />,
-//     }
-//     return dynamicCmpMap[props.cmpType]
-// }

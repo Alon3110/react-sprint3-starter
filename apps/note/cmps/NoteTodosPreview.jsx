@@ -1,4 +1,4 @@
-export function NoteTodosPreview({ note, onRemoveNote }) {
+export function NoteTodosPreview({ note, onRemoveNote, setNoteColor }) {
 
     const { info } = note
 
@@ -12,6 +12,7 @@ export function NoteTodosPreview({ note, onRemoveNote }) {
                     </li>
                 })}
             </ul>
+            {/* <button onClick={<NoteColor />}>Change color</button> */}
             <button onClick={() => onRemoveNote(note.id)}>X</button>
         </div>
     )

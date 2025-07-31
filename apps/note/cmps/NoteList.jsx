@@ -3,11 +3,14 @@ import { NoteTodosPreview } from "./NoteTodosPreview.jsx"
 
 export function NoteList({ notes, onRemoveNote }) {
 
+    const [noteColor, setNoteColor] = useState()
+
+    if (!noteColor) return <div className="loader">Loading...</div>
     if (!notes) return <div className="loader">Loading...</div>
     return (<section className="notes-container">
         {notes.map(note => (
             <div key={note.id}>
-                <DynamicCmp note={note} onRemoveNote={onRemoveNote} />
+                <DynamicCmp note={note} onRemoveNote={onRemoveNote} setNoteColor={setNoteColor} />
             </div>
         ))}
         {/* <button className="btn-add-note" onClick={toggleAddNote}>+</button> */}
