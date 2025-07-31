@@ -22,9 +22,9 @@ export const mailService = {
 function query(filterBy = {}) {
     return storageService.query(MAIL_KEY)
     .then(mails => {
-        if (filterBy.txt) {
-            const regExp = new RegExp(filterBy.txt, 'i')
-            mails = mails.filter(mail => regExp.test(mail.title))
+        if (filterBy.subject) {
+            const regExp = new RegExp(filterBy.subject, 'i')
+            mails = mails.filter(mail => regExp.test(mail.subject))
         }
         if (filterBy.price) {
             mails = mails.filter(mail => mail.listPrice.amount >= +filterBy.price)
@@ -87,8 +87,8 @@ function getEmptyMail(title = '', amount = '', description = '', pageCount = '',
     }
 }
 
-function getDefaultFilter(filterBy = { title: '', minPrice: 0, maxPrice: 0 }) {
-    return { title: filterBy.title, minPrice: filterBy.minPrice, maxPrice: 0 }
+function getDefaultFilter(filterBy = { subject: '', body: '', from: '', to: ''}) {
+    return { subject: filterBy.subject, body: filterBy.body, from: filterBy.from, to: filterBy.to}
 }
 
 function _createMails() {

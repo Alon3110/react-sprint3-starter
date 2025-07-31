@@ -8,3 +8,5 @@
 @import './pages/mail-edit.css';
 @import './pages/mail-details.css';
 
+/* MEDIA QUERY */
+@import './mq.css'

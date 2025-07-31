@@ -1,5 +1,6 @@
 import { mailService } from "../services/mail.service.js"
 import { MailList } from "../cmps/MailList.jsx"
+import { MailFilter } from "../cmps/MailFilter.jsx"
 import { MailDetails } from "./MailDetails.jsx"
 import { MailEdit } from "./MailEdit.jsx"
 import { showSuccessMsg, showErrorMsg } from "../../../services/event-bus.service.js"
@@ -12,13 +13,15 @@ export function MailIndex() {
     const [readCount, setReadCount] = useState(0)
     const [selectedMailId, setMailId] = useState(null)
     const [addNewMail, setAddNewMail] = useState(false)
+    const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
+
 
     useEffect(() => {
         loadMails()
-    }, [])
+    }, [filterBy])
 
     function loadMails() {
-        mailService.query()
+        mailService.query(filterBy)
             .then(mails => {
                 setMails(mails)
             })
@@ -73,12 +76,17 @@ export function MailIndex() {
         })
     }
 
+    function handleSetFilter(newFilterBy) {
+        setFilterBy(prevFilter => ({ ...prevFilter, ...newFilterBy }))
+    }
+
     if (!mails) return <div>Loading...</div>
 
     return (
         <section className="container">
             <h1>Mail app</h1>
             <p>{readCount} Mails to read</p>
+            {!selectedMailId &&<MailFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy}/>}
             <button className="compose-btn" onClick={() => setAddNewMail(true)}>Compose</button>
             {selectedMailId && <MailDetails mailId={selectedMailId} setMailId={setMailId} />}
             {!selectedMailId && <MailList mails={mails} onRead={markAsRead} onRemove={removeMail} setMailId={setMailId} />}
