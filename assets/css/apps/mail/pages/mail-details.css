@@ -1,0 +1,71 @@
+.gmail-message {
+    background-color: white;
+    border-radius: 8px;
+    margin: 40px auto;
+    max-width: 860px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    padding: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* Header area */
+.gmail-message-header {
+    padding: 24px 32px 16px;
+    border-bottom: 1px solid var(--line-seperator);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.email-subject {
+    font-size: 20px;
+    font-weight: 500;
+    color: #202124;
+}
+
+.email-sender {
+    font-size: 14px;
+    color: #5f6368;
+}
+
+.email-date {
+    font-size: 12px;
+    color: #5f6368;
+    align-self: flex-start;
+}
+
+/* Body content */
+.gmail-message-body {
+    padding: 32px;
+    color: #202124;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* Footer info */
+.gmail-message-footer {
+    border-top: 1px solid var(--line-seperator);
+    background-color: #f8f9fa;
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #5f6368;
+}
+
+.gmail-message-footer button {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.gmail-message-footer button:hover {
+    background-color: #1558c0;
+}

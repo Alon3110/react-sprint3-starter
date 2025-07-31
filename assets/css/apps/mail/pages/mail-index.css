@@ -1,0 +1,90 @@
+
+.container {
+    background-color: var(--bg-index);
+    color: var(--color-primary-txt);
+    min-height: 100vh;
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+}
+
+.container h1 {
+    color: var(--color-primary-txt);
+    font-size: 2rem;
+}
+
+.container p {
+    color: var(--color-secondary-txt);
+}
+
+.container button {
+    background-color: var(--bg-compose-btn);
+    color: white;
+    border: none;
+    padding: 0.6em 1.4em;
+    border-radius: 24px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.container button:hover {
+    background-color: #1558b0; 
+}
+
+.mail-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mail-list li {
+    background-color: white;
+    border-bottom: 1px solid var(--line-seperator);
+    padding: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.mail-list li:hover {
+    background-color: var(--bg-hover);
+}
+
+.mail-list li.read {
+    background-color: var(--bg-read-mail);
+    font-weight: normal;
+}
+
+.mail-list li.unread {
+    background-color: #e8f0fe;
+    font-weight: bold;
+}
+
+.mail-list .details h2,
+.mail-list .details h4,
+.mail-list .details p {
+    margin: 0.25em 0;
+}
+
+.mail-list .details h4 span {
+    color: var(--color-secondary-txt);
+    font-weight: normal;
+}
+
+.mail-list button.close {
+    background: none;
+    border: none;
+    color: var(--color-secondary-txt);
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.mail-list button.close:hover {
+    color: var(--color-primary-txt);
+}
