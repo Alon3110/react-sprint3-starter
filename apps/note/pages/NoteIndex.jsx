@@ -2,7 +2,6 @@ import { NoteList } from "../cmps/NoteList.jsx"
 import { noteService } from "../services/note.service.js"
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 import { AddNote } from "../cmps/AddNote.jsx"
-import { AddTodosNote } from "../cmps/AddTodosNote.jsx"
 
 const { useState, useEffect } = React
 export function NoteIndex() {
