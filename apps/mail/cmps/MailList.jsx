@@ -4,6 +4,12 @@ export function MailList({ mails, onRead, onRemove, setMailId }) {
 
     return (
         <article className="mail-list">
+            <div className="side-bar">
+                <p>Inbox</p>
+                <p>Sent</p>
+                <p>Stared</p>
+                <p>Copy</p>
+            </div>
             <ul>
                 {mails.map(mail => (
                     <li
