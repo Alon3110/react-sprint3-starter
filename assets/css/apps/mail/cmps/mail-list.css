@@ -1,0 +1,32 @@
+.mail-list {
+    width: 100%;
+    background-color: var(--bg-index); /* #f6f8fc */
+    border-top: 1px solid var(--line-seperator); /* #dadce0 */
+}
+
+.mail-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--line-seperator);
+    background-color: var(--bg-side-bar); 
+    cursor: pointer;
+    height: 40px;
+}
+
+.cell:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    transform: scale(1);
+}
+
+.cell.read {
+    font-weight: normal;
+}

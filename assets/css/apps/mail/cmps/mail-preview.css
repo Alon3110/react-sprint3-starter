@@ -1,22 +1,52 @@
-
-.cell {
-    background-color: white;
-    padding: 1em;
-    margin-bottom: 0.5em;
-    border: 1px solid #ddd;
-    transition: background-color 0.3s;
-}
-
-.cell.read {
-    background-color: #f0f0f0;
-}
-
-.cell h2 {
-    margin-left: 20px;
-}
-
 .details {
+    flex: 1;
     display: flex;
-    gap: 10px;
-    align-items: center;
+    gap: 1.25rem;
+    color: var(--color-primary-txt);
+    font-family: Arial, sans-serif;
+}
+
+.details h2 {
+    font-size: 14px;
+    margin: 0 0 4px;
+    font-weight: 500;
+    color: var(--color-primary-txt);
+}
+
+.details h4 {
+    font-size: 13px;
+    margin: 0;
+    font-weight: 400;
+    color: var(--color-secondary-txt); 
+}
+
+.details h4 span {
+    margin-left: 8px;
+    color: var(--color-secondary-txt);
+    font-weight: normal;
+}
+
+.details p {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: var(--color-secondary-txt);
+}
+
+button.close {
+    background: transparent;
+    border: none;
+    color: var(--color-secondary-txt);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 6px;
+    margin-left: 12px;
+    transition: color 0.2s ease;
+}
+
+button.close:hover {
+    color: #c5221f;
+}
+
+button.close i {
+    margin-left: 4px;
 }

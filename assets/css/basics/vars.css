@@ -10,4 +10,15 @@
     --gray1: #aaa;
     --gray2: #888;
     --gray3: #333;
+
+    /* MAIL-PALLETTE */
+    --bg-app-header: rgb(255, 255, 255);
+    --bg-side-bar:  rgb(255, 255, 255);
+    --bg-index: rgb(246, 248, 252);
+    --bg-read-mail:rgb(240, 240, 247);
+    --bg-hover: rgb(241, 243, 244);
+    --line-seperator:rgb(230, 230, 230);
+    --color-secondary-txt:rgb(95, 99, 104);
+    --color-primary-txt:rgb(32, 33, 36);
+    --bg-compose-btn:rgb(26, 115, 232);
 }
