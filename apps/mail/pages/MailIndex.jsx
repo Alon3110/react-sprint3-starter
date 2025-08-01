@@ -1,5 +1,6 @@
 import { mailService } from "../services/mail.service.js"
 import { MailList } from "../cmps/MailList.jsx"
+import { MailFilter } from "../cmps/MailFilter.jsx"
 import { MailDetails } from "./MailDetails.jsx"
 import { MailEdit } from "./MailEdit.jsx"
 import { showSuccessMsg, showErrorMsg } from "../../../services/event-bus.service.js"
@@ -12,13 +13,15 @@ export function MailIndex() {
     const [readCount, setReadCount] = useState(0)
     const [selectedMailId, setMailId] = useState(null)
     const [addNewMail, setAddNewMail] = useState(false)
+    const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     useEffect(() => {
         loadMails()
-    }, [])
+    }, [filterBy])
 
     function loadMails() {
-        mailService.query()
+        mailService.query(filterBy)
             .then(mails => {
                 setMails(mails)
             })
@@ -33,6 +36,16 @@ export function MailIndex() {
         if (!Array.isArray(mails)) return
         const count = mails.filter(mail => !mail.isRead).length
         setReadCount(count)
+    }
+
+    function toggleRead(mailId) {
+        setMails(prev =>
+            prev.map(mail =>
+                mail.id === mailId ? { ...mail, isRead: !mail.isRead } : mail
+            )
+        )
+        const changed = mails.find(mail => mail.id === mailId)
+        if (changed) mailService.save({ ...changed, isRead: !changed.isRead })
     }
 
     function removeMail(mailId) {
@@ -66,6 +79,10 @@ export function MailIndex() {
         }
     }
 
+    function toggleMenu() {
+        setIsMenuOpen(prev => !prev)
+    }
+
     function handleSendMail(newMail) {
         mailService.save(newMail).then(() => {
             loadMails()
@@ -73,16 +90,23 @@ export function MailIndex() {
         })
     }
 
+    function handleSetFilter(newFilterBy) {
+        setFilterBy(prevFilter => ({ ...prevFilter, ...newFilterBy }))
+    }
+
     if (!mails) return <div>Loading...</div>
 
     return (
-        <section className="container">
-            <h1>Mail app</h1>
-            <p>{readCount} Mails to read</p>
-            <button className="compose-btn" onClick={() => setAddNewMail(true)}>Compose</button>
-            {selectedMailId && <MailDetails mailId={selectedMailId} setMailId={setMailId} />}
-            {!selectedMailId && <MailList mails={mails} onRead={markAsRead} onRemove={removeMail} setMailId={setMailId} />}
-            {addNewMail && (<MailEdit onClose={() => setAddNewMail(false)} onSend={handleSendMail} />)}
+        <section className="main-layout">
+            <div className="container">
+                <h1>Mail app</h1>
+                <p>{readCount} Mails to read</p>
+                {!selectedMailId && <MailFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} toggleMenu={toggleMenu} />}
+                {selectedMailId && <MailDetails mailId={selectedMailId} setMailId={setMailId} />}
+                {!selectedMailId && <MailList mails={mails} onRead={markAsRead} onRemove={removeMail} setMailId={setMailId} setAddNewMail={setAddNewMail} isMenuOpen={isMenuOpen} onToggleRead={toggleRead} />}
+                {isMenuOpen && <div className="screen-overlay" onClick={() => toggleMenu(false)}></div>}
+                {addNewMail && (<MailEdit onClose={() => setAddNewMail(false)} onSend={handleSendMail} />)}
+            </div>
         </section>
     )
 }

@@ -8,7 +8,7 @@ export const demoData = [
         sentAt: 1551133930594,
         removedAt: null,
         from: 'momo@momo.com',
-        to: 'user@appsus.com'
+        to: 'user@appsus.com',
     },
     {
         id: 'e102',
@@ -19,6 +19,6 @@ export const demoData = [
         sentAt: 1531133930594,
         removedAt: null,
         from: 'pomo@pomo.com',
-        to: 'user@appsus.com'
+        to: 'user@appsus.com',
     }
 ]
