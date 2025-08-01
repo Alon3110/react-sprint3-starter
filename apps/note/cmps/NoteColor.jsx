@@ -1,6 +1,7 @@
 export function NoteColor({ noteId, onSetNoteColor, backgroundColor }) {
-    
+
     const colors = [
+        'transparent',
         '#faafa8',
         '#f39f76',
         '#fff8b8',

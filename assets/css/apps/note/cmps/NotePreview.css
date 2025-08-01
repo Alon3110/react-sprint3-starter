@@ -1,19 +1,46 @@
 .note {
     position: relative;
     width: 100%;
-    padding: 0.5rem;
+    padding: 1rem;
     border-radius: 0.5rem;
     outline: 1px solid var(--bg1);
 }
 
 .note:hover {
-    box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.7)
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
 
-.note h1 {
+.note h1, .note ul, .note p {
     margin-block-end: 0.5rem;
 }
 
+.note li {
+    margin-block-end: 0.2rem;
+}
+
 .todos-list {
-    list-style-type: none;
+    margin-inline-start: 1rem;
+    list-style-type: circle;
+}
+
+.btns-app {
+    height: 1.2rem;
+}
+
+.color-input{
+    display: flex;
+}
+
+.color-input .item {
+    /* border: whitesmoke 3px solid; */
+    display: grid;
+    padding: 5px;
+    margin: 5px;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+
+    cursor: pointer;
+    transition: .2s border-width;
+    place-items: center;
 }
