@@ -14,6 +14,7 @@ export function MailIndex() {
     const [selectedMailId, setMailId] = useState(null)
     const [addNewMail, setAddNewMail] = useState(false)
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
 
 
     useEffect(() => {
@@ -36,6 +37,10 @@ export function MailIndex() {
         if (!Array.isArray(mails)) return
         const count = mails.filter(mail => !mail.isRead).length
         setReadCount(count)
+    }
+
+    function toggleMenu() {
+        setIsMenuOpen(prev => !prev)
     }
 
     function removeMail(mailId) {
@@ -83,14 +88,16 @@ export function MailIndex() {
     if (!mails) return <div>Loading...</div>
 
     return (
-        <section className="container">
-            <h1>Mail app</h1>
-            <p>{readCount} Mails to read</p>
-            {!selectedMailId &&<MailFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy}/>}
-            <button className="compose-btn" onClick={() => setAddNewMail(true)}>Compose</button>
-            {selectedMailId && <MailDetails mailId={selectedMailId} setMailId={setMailId} />}
-            {!selectedMailId && <MailList mails={mails} onRead={markAsRead} onRemove={removeMail} setMailId={setMailId} />}
-            {addNewMail && (<MailEdit onClose={() => setAddNewMail(false)} onSend={handleSendMail} />)}
+        <section className="main-layout">
+            <div className="container">
+                <h1>Mail app</h1>
+                <p>{readCount} Mails to read</p>
+                {!selectedMailId && <MailFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} toggleMenu={toggleMenu} />}
+                {selectedMailId && <MailDetails mailId={selectedMailId} setMailId={setMailId} />}
+                {!selectedMailId && <MailList mails={mails} onRead={markAsRead} onRemove={removeMail} setMailId={setMailId} setAddNewMail={setAddNewMail} isMenuOpen={isMenuOpen}/>}
+                {isMenuOpen && <div className="screen-overlay" onClick={() => toggleMenu(false)}></div>}
+                {addNewMail && (<MailEdit onClose={() => setAddNewMail(false)} onSend={handleSendMail} />)}
+            </div>
         </section>
     )
 }

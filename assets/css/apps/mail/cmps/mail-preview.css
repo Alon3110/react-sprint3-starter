@@ -5,7 +5,7 @@
 .details {
     flex: 1;
     display: flex;
-    /* justify-content: space-around; */
+    justify-content: space-between;
     gap: 1.25rem;
     color: var(--color-primary-txt);
     font-family: Arial, sans-serif;

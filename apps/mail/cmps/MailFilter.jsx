@@ -1,7 +1,7 @@
 const { useState, useEffect } = React
 const { useParams, useNavigate, Link } = ReactRouterDOM
 
-export function MailFilter({ defaultFilter, handleSetFilter }) {
+export function MailFilter({ defaultFilter, handleSetFilter, toggleMenu }) {
     const [filterByToEdit, setFilterByToEdit] = useState(defaultFilter)
 
     useEffect(() => {
@@ -13,19 +13,23 @@ export function MailFilter({ defaultFilter, handleSetFilter }) {
         const value = target.value
         setFilterByToEdit(prev => ({ ...prev, [field]: value }))
     }
+
     const { subject } = filterByToEdit
-    console.log(subject);
 
     return (
-        <form>
-            <label htmlFor="subject"></label>
-            <input onChange={handleChange}
-                name="subject"
-                value={subject}
-                id="subject"
-                type="text"
-                placeholder="Search mail"
-            />
-        </form>
+        <section className="main-filter">
+            <button className="btn-toggle-menu" type="button" onClick={toggleMenu}>☰</button>
+
+            <form className="search-bar">
+                <label htmlFor="subject"></label>
+                <input onChange={handleChange}
+                    name="subject"
+                    value={subject}
+                    id="subject"
+                    type="text"
+                    placeholder="Search mail"
+                />
+            </form>
+        </section>
     )
 }
