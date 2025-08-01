@@ -106,8 +106,8 @@ export function AddNote({ setNotes }) {
                     />
                     {isExpanded && (
                         <div className="note-actions">
-                            <button type="submit">Save</button>
-                            <button type="button" onClick={() => setNoteType('NoteTodo')}>+ Todo</button>
+                            <button type="button" onClick={() => setNoteType('NoteTodo')}>Todos</button>
+                            <button type="submit">Close</button>
                         </div>
                     )}
                 </form>
@@ -124,8 +124,8 @@ export function AddNote({ setNotes }) {
                         className="note-textarea"
                     />
                     <div className="note-actions">
-                        <button type="submit">Save</button>
                         <button type="button" onClick={() => setNoteType('NoteTxt')}>← Back</button>
+                        <button type="submit">Close</button>
                     </div>
                 </form>
             )}
