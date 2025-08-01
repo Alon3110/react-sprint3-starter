@@ -1,31 +1,39 @@
-import { debounce } from "../../../services/util.service"
+import { utilService } from "../../../services/util.service.js"
+import { noteService } from "../services/note.service.js"
 
 const { useState, useEffect, useRef } = React
 
-export function NoteFilter({ filterBy, onSetFilterBy }) {
+export function NoteFilter({ setNotes }) {
 
-    const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
-    const onSetFilterByDebounce = useRef(debounce(onSetFilterBy, 500)).current
+    const [filterByToEdit, setFilterByToEdit] = useState({ txt: '' })
+    const searchNotesDebounce = useRef(utilService.debounce(searchNotes, 500)).current
+    const { txt } = filterByToEdit
 
     useEffect(() => {
-        onSetFilterByDebounce(filterByToEdit)
+        searchNotesDebounce(filterByToEdit)
     }, [filterByToEdit])
 
     function handleChange({ target }) {
-        isPinned ? setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value })) : target
+        const field = target.name
+        let value = target.value
+
+        setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
+    function searchNotes(filterBy) {
+        noteService.query(filterBy)
+            .then(setNotes)
+            .catch(err => {
+                console.log('Error searching note:', err)
+                showErrorMsg('Error searching note!')
+            })
+    }
 
-    const { txt, minSpeed } = filterByToEdit
     return (
-        <section className="note-filter container">
-            <h2>Filter Our Notes</h2>
+        <section className="search-note-txt">
             <form>
-                <label htmlFor="txt">Vendor</label>
+                <label htmlFor="txt">Search notes by text</label>
                 <input onChange={handleChange} value={txt} name="txt" id="txt" type="text" />
-
-                <label htmlFor="minSpeed">Min Speed</label>
-                <input onChange={handleChange} value={minSpeed || ''} name="minSpeed" id="minSpeed" type="number" />
             </form>
         </section>
     )

@@ -1,0 +1,10 @@
+.note-filter {
+    background-color: var(--gray1);
+    padding-block: 1em;
+}
+
+.note-filter form {
+    display: grid;
+    grid-template-columns: 100px 200px;
+    gap: .5em;
+}

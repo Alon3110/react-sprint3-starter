@@ -1,13 +1,15 @@
-import { NoteList } from "../cmps/NoteList.jsx"
 import { noteService } from "../services/note.service.js"
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
+import { NoteList } from "../cmps/NoteList.jsx"
 import { AddNote } from "../cmps/AddNote.jsx"
+import { NoteFilter } from "../cmps/NoteFilter.jsx"
 
 const { useState, useEffect } = React
 
 export function NoteIndex() {
 
     const [notes, setNotes] = useState(null)
+    const [isSearch, setIsSearch] = useState(false)
 
     useEffect(() => {
         loadNotes()
@@ -58,12 +60,28 @@ export function NoteIndex() {
             })
     }
 
+    function onToggleSearch() {
+        setIsSearch(prev => !prev)
+    }
 
+    function onSetFilterBy(filterByToEdit) {
+        setFilterBy({ ...filterByToEdit })
+    }
 
     if (!notes) return <div className="loader">Loading...</div>
     return (
         <section className="note-index">
-            <AddNote setNotes={setNotes} />
+            <div className="upper-bars">
+                <AddNote setNotes={setNotes} />
+                <img
+                    src="../../../assets/img/svgs/search.svg"
+                    alt=""
+                    className="btns-app"
+                    onClick={onToggleSearch} />
+            </div>
+            {isSearch && (
+                <NoteFilter setNotes={setNotes}/>
+            )}
             <NoteList notes={notes} onRemoveNote={onRemoveNote} onSetNoteColor={onSetNoteColor} />
         </section>
     )

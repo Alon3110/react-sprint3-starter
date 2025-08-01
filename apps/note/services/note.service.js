@@ -15,11 +15,26 @@ export const noteService = {
     getEmptyTodo,
 }
 
-function query() {
+// function query() {
+//     return storageService.query(NOTE_KEY)
+// }
+
+function query(filterBy = {}) {
     return storageService.query(NOTE_KEY)
+        .then(notes => {
+            if (filterBy.txt) {
+                const regex = new RegExp(filterBy.txt, 'i')
+                notes = notes.filter(note =>
+                    regex.test(note.info.title || '') ||
+                    regex.test(note.info.txt || '') ||
+                    (note.info.todos && note.info.todos.some(todo => regex.test(todo.txt))) // if it's a todo
+                )
+            }
+            return notes
+        })
 }
 
-function get(noteId) {    
+function get(noteId) {
     return storageService.get(NOTE_KEY, noteId)
 }
 
@@ -35,14 +50,32 @@ function save(note) {
     }
 }
 
+// function getEmptyNote(type) {
+//     // add if for every note type
+//     if (type === 'NoteTxt') {
+//         return {
+//             type,
+//             isPinned: false,
+//             style: {
+//                 backgroundColor: '#00d'
+//             },
+//             info: {
+//                 title: '',
+//                 txt: '',
+//             }
+//         }
+//     } else if (type === 'NoteTodo') {
+//         return ''
+//     }
+// }
+
 function getEmptyNote(type) {
-    // add if for every note type
     if (type === 'NoteTxt') {
         return {
             type,
             isPinned: false,
             style: {
-                backgroundColor: '#00d'
+                backgroundColor: 'transparent'
             },
             info: {
                 title: '',
@@ -50,7 +83,18 @@ function getEmptyNote(type) {
             }
         }
     } else if (type === 'NoteTodo') {
-        return ''
+        return {
+            type,
+            isPinned: false,
+            style: {
+                backgroundColor: 'transparent'
+            },
+            info: {
+                title: '',
+                txt: '',
+                todos: []
+            }
+        }
     }
 }
 
