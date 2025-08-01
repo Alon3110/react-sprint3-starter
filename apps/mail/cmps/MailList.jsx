@@ -1,6 +1,14 @@
 import { MailPreview } from "./MailPreview.jsx";
 
-export function MailList({ mails, onRead, onRemove, setMailId, setAddNewMail, isMenuOpen }) {
+export function MailList({
+    mails,
+    onRead,
+    onRemove,
+    setMailId,
+    setAddNewMail,
+    isMenuOpen,
+    onToggleRead
+}) {
 
     return (
         <article className="mail-list">
@@ -10,7 +18,7 @@ export function MailList({ mails, onRead, onRemove, setMailId, setAddNewMail, is
                 <p>Inbox</p>
                 <p>Sent</p>
                 <p>Stared</p>
-                <p>Copy</p>
+                <p>Draft</p>
             </div>
             <ul>
                 {mails.map(mail => (
@@ -22,7 +30,7 @@ export function MailList({ mails, onRead, onRemove, setMailId, setAddNewMail, is
                             onRead(mail.id)
                         }}
                     >
-                        <MailPreview mail={mail} onRemove={onRemove} />
+                        <MailPreview mail={mail} onRemove={onRemove} onRead={onRead} onToggleRead={onToggleRead} />
 
                     </li>
                 ))}

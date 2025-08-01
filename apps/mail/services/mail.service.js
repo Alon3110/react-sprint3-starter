@@ -17,6 +17,7 @@ export const mailService = {
     getDefaultFilter,
     addReview,
     _setNextprevMailId,
+    getFilterFromSearchParams
 }
 
 function query(filterBy = {}) {
@@ -70,25 +71,44 @@ function _setNextprevMailId(mail) {
     })
 }
 
-function getEmptyMail(title = '', amount = '', description = '', pageCount = '', language = 'en', authors = '') {
+function getEmptyMail() {
     return {
-        title,
-        authors,
-        description,
-        pageCount,
-        thumbnail: `/assets/mailsImages/15.jpg`,
-        language,
-        listPrice: {
-            amount,
-            currencyCode: "EUR",
-            isOnSale: Math.random() > 0.7
-        },
-        reviews: []
+        id: Date.now(),
+        to: '',
+        subject: '',
+        body: '',
+        isRead: false,
+        sentAt: null,
     }
 }
+// function getEmptyMail(title = '', amount = '', description = '', pageCount = '', language = 'en', authors = '') {
+//     return {
+//         title,
+//         authors,
+//         description,
+//         pageCount,
+//         thumbnail: `/assets/mailsImages/15.jpg`,
+//         language,
+//         listPrice: {
+//             amount,
+//             currencyCode: "EUR",
+//             isOnSale: Math.random() > 0.7
+//         },
+//         reviews: []
+//     }
+// }
 
 function getDefaultFilter(filterBy = { subject: '', body: '', from: '', to: ''}) {
     return { subject: filterBy.subject, body: filterBy.body, from: filterBy.from, to: filterBy.to}
+}
+
+function getFilterFromSearchParams(searchParams) {
+    const isRead = searchParams.get('read') || ''
+    const minSpeed = searchParams.get('minSpeed') || ''
+    return {
+        isRead,
+        minSpeed
+    }
 }
 
 function _createMails() {

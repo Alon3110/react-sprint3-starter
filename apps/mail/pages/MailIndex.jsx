@@ -16,7 +16,6 @@ export function MailIndex() {
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-
     useEffect(() => {
         loadMails()
     }, [filterBy])
@@ -39,8 +38,14 @@ export function MailIndex() {
         setReadCount(count)
     }
 
-    function toggleMenu() {
-        setIsMenuOpen(prev => !prev)
+    function toggleRead(mailId) {
+        setMails(prev =>
+            prev.map(mail =>
+                mail.id === mailId ? { ...mail, isRead: !mail.isRead } : mail
+            )
+        )
+        const changed = mails.find(mail => mail.id === mailId)
+        if (changed) mailService.save({ ...changed, isRead: !changed.isRead })
     }
 
     function removeMail(mailId) {
@@ -74,6 +79,10 @@ export function MailIndex() {
         }
     }
 
+    function toggleMenu() {
+        setIsMenuOpen(prev => !prev)
+    }
+
     function handleSendMail(newMail) {
         mailService.save(newMail).then(() => {
             loadMails()
@@ -94,7 +103,7 @@ export function MailIndex() {
                 <p>{readCount} Mails to read</p>
                 {!selectedMailId && <MailFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} toggleMenu={toggleMenu} />}
                 {selectedMailId && <MailDetails mailId={selectedMailId} setMailId={setMailId} />}
-                {!selectedMailId && <MailList mails={mails} onRead={markAsRead} onRemove={removeMail} setMailId={setMailId} setAddNewMail={setAddNewMail} isMenuOpen={isMenuOpen}/>}
+                {!selectedMailId && <MailList mails={mails} onRead={markAsRead} onRemove={removeMail} setMailId={setMailId} setAddNewMail={setAddNewMail} isMenuOpen={isMenuOpen} onToggleRead={toggleRead} />}
                 {isMenuOpen && <div className="screen-overlay" onClick={() => toggleMenu(false)}></div>}
                 {addNewMail && (<MailEdit onClose={() => setAddNewMail(false)} onSend={handleSendMail} />)}
             </div>
