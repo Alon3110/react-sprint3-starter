@@ -16,8 +16,7 @@ export const demoData = [
         createdAt: 1625349998723,
         type: 'NoteTodo',
         isPinned: false,
-        // style: { backgroundColor: '#c1e1ff' },
-        style: { backgroundColor: '#ffc1c1' },
+        style: { backgroundColor: '#c1e1ff' },
         info: {
             title: 'Groceries',
             todos: [

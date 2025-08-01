@@ -4,6 +4,7 @@ import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.servic
 import { AddNote } from "../cmps/AddNote.jsx"
 
 const { useState, useEffect } = React
+
 export function NoteIndex() {
 
     const [notes, setNotes] = useState(null)
@@ -67,18 +68,3 @@ export function NoteIndex() {
         </section>
     )
 }
-
-//   function handleSetColor(newStyle) {
-//     const updatedNote = {
-//       ...note,
-//       style: {
-//         ...(note.style || {}),
-//         ...newStyle
-//       }
-//     }
-//     onUpdateNote(updatedNote)
-//   }
-
-// function handleUpdateNote(updatedNote) {
-//     setNotes(prevNotes => prevNotes.map(note => (note.id === updatedNote.id ? updatedNote : note)))
-// }
