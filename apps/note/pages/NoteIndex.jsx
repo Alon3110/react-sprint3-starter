@@ -7,7 +7,6 @@ const { useState, useEffect } = React
 export function NoteIndex() {
 
     const [notes, setNotes] = useState(null)
-    const [noteColor, setNoteColor] = useState('red')
 
     useEffect(() => {
         loadNotes()
@@ -35,22 +34,31 @@ export function NoteIndex() {
     }
 
     function onSetNoteColor(noteId, color) {
+
         noteService.get(noteId)
             .then(note => {
                 const updatedNote = {
                     ...note, style: {
                         ...note.style, backgroundColor: color
                     }
-                }                
+                }
                 return noteService.save(updatedNote)
             })
+            .then(savedNote => {
+                setNotes(prevNotes =>
+                    prevNotes.map(note =>
+                        note.id === savedNote.id ? savedNote : note
+                    )
+                )
+            })
             .catch(err => {
-                console.log('Error deleting note:', err)
-                showErrorMsg('Error deleting note!')
+                console.log('Error changing color:', err)
+                showErrorMsg('Error changing color!')
             })
     }
 
-    if (!noteColor) return <div className="loader">Loading...</div>
+
+
     if (!notes) return <div className="loader">Loading...</div>
     return (
         <section className="note-index">
@@ -59,3 +67,18 @@ export function NoteIndex() {
         </section>
     )
 }
+
+//   function handleSetColor(newStyle) {
+//     const updatedNote = {
+//       ...note,
+//       style: {
+//         ...(note.style || {}),
+//         ...newStyle
+//       }
+//     }
+//     onUpdateNote(updatedNote)
+//   }
+
+// function handleUpdateNote(updatedNote) {
+//     setNotes(prevNotes => prevNotes.map(note => (note.id === updatedNote.id ? updatedNote : note)))
+// }

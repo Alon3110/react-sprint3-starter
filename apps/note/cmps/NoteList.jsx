@@ -10,7 +10,6 @@ export function NoteList({ notes, onRemoveNote, onSetNoteColor }) {
                 <DynamicCmp note={note} onRemoveNote={onRemoveNote} onSetNoteColor={onSetNoteColor} />
             </div>
         ))}
-        {/* <button className="btn-add-note" onClick={toggleAddNote}>+</button> */}
     </section>)
 }
 

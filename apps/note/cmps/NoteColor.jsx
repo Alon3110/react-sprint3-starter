@@ -1,17 +1,20 @@
-export function NoteColor({onSetNoteColor, backgroundColor }) {
-
-    console.log('backgroundColor:', backgroundColor)
+export function NoteColor({ noteId, onSetNoteColor, backgroundColor }) {
+    
     const colors = [
-        '#F44236',
-        '#9C27B0',
-        '#3F51B5',
-        '#2196F3',
-        '#4caf50',
-        '#101010',
+        '#faafa8',
+        '#f39f76',
+        '#fff8b8',
+        '#e2f6d3',
+        '#b4ddd3',
+        '#d4e4ed',
+        '#aeccdc',
+        '#d3bfdb',
+        '#f6e2dd',
+        '#efeff1',
     ]
 
-    function onSetColor(color) {
-        onSetNoteColor({ backgroundColor: color })
+    function handleSetColor(noteId, color) {
+        onSetNoteColor(noteId, color)
     }
 
     return (
@@ -21,7 +24,7 @@ export function NoteColor({onSetNoteColor, backgroundColor }) {
                     className={`item ${color === backgroundColor ? 'chosen' : ''}`}
                     key={color}
                     style={{ backgroundColor: color }}
-                    onClick={() => onSetColor(color)}
+                    onClick={() => handleSetColor(noteId, color)}
                 >
                 </div>
             ))}
