@@ -2,7 +2,6 @@ import { NoteList } from "../cmps/NoteList.jsx"
 import { noteService } from "../services/note.service.js"
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 import { AddNote } from "../cmps/AddNote.jsx"
-import { FloatingNoteBar } from "./FloatingNoteBar"
 
 const { useState, useEffect } = React
 export function NoteIndex() {

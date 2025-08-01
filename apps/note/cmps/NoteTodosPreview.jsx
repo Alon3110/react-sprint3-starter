@@ -22,8 +22,8 @@ export function NoteTodosPreview({ note, onRemoveNote, onSetNoteColor }) {
                 })}
             </ul>
             <div className="btn-note-bar">
-                <img src="../../assets/note-svgs/colors.svg" alt="" className="btns-app" onClick={() => onSetNoteColor(note.id, note.style.backgroundColor)} />
-                <img src="../../assets/note-svgs/delete.svg" alt="" className="btns-app" onClick={() => onRemoveNote(note.id)} />
+                     <img src="../../assets/img/svgs/colors-black.svg" alt="" className="btns-app" onClick={() => onSetNoteColor(note.id, note.style.backgroundColor)} />
+                <img src="../../assets/img/svgs/delete.svg" alt="" className="btns-app" onClick={() => onRemoveNote(note.id)} />
             </div>
         </div>
     )
