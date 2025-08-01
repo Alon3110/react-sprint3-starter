@@ -3,15 +3,28 @@ import { noteService } from "../services/note.service.js"
 
 const { useState, useEffect, useRef } = React
 
-export function NoteFilter({ setNotes }) {
+export function NoteFilter({ setNotes }, onToggleSearch ) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({ txt: '' })
     const searchNotesDebounce = useRef(utilService.debounce(searchNotes, 500)).current
     const { txt } = filterByToEdit
+    
+    const wrapperRef = useRef()
 
     useEffect(() => {
         searchNotesDebounce(filterByToEdit)
     }, [filterByToEdit])
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+                onToggleSearch()
+                resetNote()
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
 
     function handleChange({ target }) {
         const field = target.name
@@ -31,7 +44,7 @@ export function NoteFilter({ setNotes }) {
 
     return (
         <section className="search-note-txt">
-            <form>
+            <form onSubmit={(ev) => ev.preventDefault()}>
                 <label htmlFor="txt">Search notes by text</label>
                 <input onChange={handleChange} value={txt} name="txt" id="txt" type="text" />
             </form>

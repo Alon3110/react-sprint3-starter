@@ -12,7 +12,6 @@ export const noteService = {
     save,
     getEmptyNote,
     createTodo,
-    getEmptyTodo,
 }
 
 // function query() {
@@ -27,7 +26,7 @@ function query(filterBy = {}) {
                 notes = notes.filter(note =>
                     regex.test(note.info.title || '') ||
                     regex.test(note.info.txt || '') ||
-                    (note.info.todos && note.info.todos.some(todo => regex.test(todo.txt))) // if it's a todo
+                    (note.info.todos && note.info.todos.some(todo => regex.test(todo.txt)))
                 )
             }
             return notes
@@ -42,32 +41,13 @@ function remove(noteId) {
     return storageService.remove(NOTE_KEY, noteId)
 }
 
-function save(note) {
+function save(note) {    
     if (note.id) {
         return storageService.put(NOTE_KEY, note)
     } else {
         return storageService.post(NOTE_KEY, note)
     }
 }
-
-// function getEmptyNote(type) {
-//     // add if for every note type
-//     if (type === 'NoteTxt') {
-//         return {
-//             type,
-//             isPinned: false,
-//             style: {
-//                 backgroundColor: '#00d'
-//             },
-//             info: {
-//                 title: '',
-//                 txt: '',
-//             }
-//         }
-//     } else if (type === 'NoteTodo') {
-//         return ''
-//     }
-// }
 
 function getEmptyNote(type) {
     if (type === 'NoteTxt') {
@@ -104,18 +84,6 @@ function createTodo(tasks) {
     })
 }
 
-function getEmptyTodo() {
-    return {
-        type: 'NoteTodo',
-        isPinned: false,
-        info: {
-            title: '',
-            todos: [
-            ]
-        }
-    }
-}
-
 function _createNotes() {
     let notes = utilService.loadFromStorage(NOTE_KEY)
 
@@ -124,8 +92,6 @@ function _createNotes() {
         utilService.saveToStorage(NOTE_KEY, notes)
     }
 }
-
-// NoteTodos
 
 function _createTodo(txt) {
     return {

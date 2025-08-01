@@ -42,8 +42,8 @@ export function AddNote({ setNotes }) {
         ev.preventDefault()
         if (!noteToEdit) return
         const tasks = noteToEdit.split(',').map(txt => txt.trim()).filter(txt => txt)
+        const todoToSave = noteService.getEmptyNote('NoteTodo')  
         const todos = noteService.createTodo(tasks)
-        const todoToSave = noteService.getEmptyTodo()
         todoToSave.info.todos = todos
         todoToSave.createdAt = Date.now()
 

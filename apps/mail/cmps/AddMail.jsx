@@ -1,4 +1,4 @@
-export function AddMail({ onSubmit }) {
+export function AddMail({ onSubmit, mail, handleChange }) {
 
     function handleSubmit(ev) {
         ev.preventDefault()
@@ -18,7 +18,7 @@ export function AddMail({ onSubmit }) {
         <form onSubmit={handleSubmit}>
             <input name="to" placeholder="To" required />
             <input name="subject" placeholder="Subject" required />
-            <textarea name="body" placeholder="Body"></textarea>
+            <textarea name="body" placeholder="Body" ></textarea>
             <button className="save-mail-btn" type="submit">Send</button>
         </form>
     )

@@ -2,9 +2,12 @@
 @import './cmps/mail-list.css';
 @import './cmps/mail-preview.css';
 @import './cmps/add-mail.css';
+@import './cmps/mail-filter.css';
 
 /* PAGES */
 @import './pages/mail-index.css';
 @import './pages/mail-edit.css';
 @import './pages/mail-details.css';
+
+/* MEDIA QUERY */
 

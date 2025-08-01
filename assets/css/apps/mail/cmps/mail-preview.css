@@ -1,3 +1,15 @@
+/* Kill the browser’s default button hover/active bg */
+button.unread,
+button.unread:hover,
+button.unread:focus,
+button.unread:active {
+  background-color: transparent !important;
+  outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+
 .content {
     display: flex;
 }
@@ -5,7 +17,7 @@
 .details {
     flex: 1;
     display: flex;
-    /* justify-content: space-around; */
+    justify-content: space-between;
     gap: 1.25rem;
     color: var(--color-primary-txt);
     font-family: Arial, sans-serif;
@@ -47,10 +59,33 @@ button.close {
     transition: color 0.2s ease;
 }
 
-button.close:hover {
-    color: #c5221f;
-}
-
 button.close i {
     margin-left: 4px;
+}
+
+button.unread {
+    margin-top: 0.5rem;
+    background: transparent;
+    border: none;
+    color: var(--color-secondary-txt);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 6px;
+    transition: color 0.2s ease;
+}
+
+button.unread i {
+        transition: color 0.2s ease;
+    margin-left: 4px;
+}
+
+button.unread:hover {
+    color: var(--color-primary-txt);
+    background-color: none;
+}
+
+.preview-btn {
+    justify-content: center;
+    align-content: center;
+    display: flex;
 }

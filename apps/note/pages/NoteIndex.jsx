@@ -64,10 +64,6 @@ export function NoteIndex() {
         setIsSearch(prev => !prev)
     }
 
-    function onSetFilterBy(filterByToEdit) {
-        setFilterBy({ ...filterByToEdit })
-    }
-
     if (!notes) return <div className="loader">Loading...</div>
     return (
         <section className="note-index">
@@ -80,7 +76,7 @@ export function NoteIndex() {
                     onClick={onToggleSearch} />
             </div>
             {isSearch && (
-                <NoteFilter setNotes={setNotes}/>
+                <NoteFilter setNotes={setNotes} onToggleSearch={onToggleSearch} />
             )}
             <NoteList notes={notes} onRemoveNote={onRemoveNote} onSetNoteColor={onSetNoteColor} />
         </section>
