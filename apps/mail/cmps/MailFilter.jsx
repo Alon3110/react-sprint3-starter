@@ -1,7 +1,7 @@
 const { useState, useEffect } = React
 const { useParams, useNavigate, Link } = ReactRouterDOM
 
-export function MailFilter({ defaultFilter, handleSetFilter, toggleMenu, sortBy, onUpdate }) {
+export function MailFilter({ defaultFilter, handleSetFilter, sortBy, onUpdate }) {
     const [filterByToEdit, setFilterByToEdit] = useState(defaultFilter)
 
     useEffect(() => {
@@ -26,7 +26,6 @@ export function MailFilter({ defaultFilter, handleSetFilter, toggleMenu, sortBy,
 
     return (
         <section className="main-filter">
-            <button className="btn-toggle-menu" type="button" onClick={toggleMenu}>☰</button>
 
             <form className="search-bar">
                 <label htmlFor="subject"></label>

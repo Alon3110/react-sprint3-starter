@@ -110,9 +110,10 @@ export function MailIndex() {
         <section className="main-layout">
             <div className="container">
                 <header className="main-header">
+                    <button className="btn-toggle-menu" type="button" onClick={toggleMenu}>☰</button>
                     <p className="logo">Gmail</p>
                     <img src="/apps/mail/img/gmail-logo.png" alt="" />
-                    {!selectedMailId && <MailFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} toggleMenu={toggleMenu} sortBy={sortBy} onUpdate={setSortBy} />}
+                    {!selectedMailId && <MailFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} sortBy={sortBy} onUpdate={setSortBy} />}
                 </header>
                 {selectedMailId && <MailDetails mailId={selectedMailId} setMailId={setMailId} />}
                 <div>
