@@ -10,10 +10,11 @@ export function AddMail({ onSubmit, mail, handleChange }) {
             body: body.value,
             sentAt: Date.now(),
             isRead: false,
-            from: 'me@appsus.com'
+            from: 'user@appsus.com'
         }
         onSubmit(mail)
-    }
+    }    
+
     return (
         <form onSubmit={handleSubmit}>
             <input name="to" placeholder="To" required />

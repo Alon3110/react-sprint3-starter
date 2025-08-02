@@ -50,9 +50,7 @@ function save(mail) {
 
   return savedMail.then(savedMail => {
     return storageService.query(MAIL_KEY).then(allMails => {
-      utilService.saveToStorage(MAIL_KEY, allMails)   
-      console.log('save');
-      
+      utilService.saveToStorage(MAIL_KEY, allMails)         
       return savedMail                                
     })
   })
