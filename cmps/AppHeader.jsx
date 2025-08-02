@@ -8,9 +8,9 @@ export function AppHeader() {
         </Link>
         <nav>
             <NavLink to="/"><img src="../assets/img/svgs/google-logo.svg" alt="google app logo" className="navbar-logo" /></NavLink>
-            <NavLink to="/about"><img src="../assets/img/svgs/about-logo.png" alt="about logo" className="navbar-logo" /></NavLink>
             <NavLink to="/mail"><img src="../assets/img/svgs/gmail-logo.png" alt="mail app logo" className="navbar-logo" /></NavLink>
             <NavLink to="/note"><img src="../assets/img/svgs/note-logo.svg" alt="note app logo" className="navbar-logo" /></NavLink>
+            <NavLink to="/about"><img src="../assets/img/svgs/about-logo.png" alt="about logo" className="navbar-logo" /></NavLink>
         </nav>
     </header>
 }

@@ -19,10 +19,10 @@ nav a.active {
 }
 
 .navbar-logo {
-    width: 20px;
+    width: 1.5rem;
     aspect-ratio: 1;
 }
 
 .app-logo {
-    width: 80px;
+    width: 5rem;
 }
