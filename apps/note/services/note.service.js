@@ -15,10 +15,6 @@ export const noteService = {
     getEmbedUrl,
 }
 
-// function query() {
-//     return storageService.query(NOTE_KEY)
-// }
-
 function query(filterBy = {}) {
     return storageService.query(NOTE_KEY)
         .then(notes => {

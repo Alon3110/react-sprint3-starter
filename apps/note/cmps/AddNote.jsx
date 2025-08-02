@@ -50,12 +50,6 @@ export function AddNote({ setNotes }) {
         }))
     }
 
-    // function onSaveImage(ev) {
-    //     ev.preventDefault()
-    //     if (!noteToEdit) return
-
-    // }
-
     // save functions:
 
     function onSaveNote(ev) {

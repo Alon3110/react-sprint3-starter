@@ -66,7 +66,6 @@ import { NoteFilter } from "../cmps/NoteFilter.jsx"
         }
         
         if (!notes) return <Loader />
-        // if (!notes) return <div className="loader note-loader">Loading...</div>
     return (
         <section className="note-index">
             <div className="upper-index-bars">

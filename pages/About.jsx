@@ -4,7 +4,7 @@ export function About() {
             <div className="about-grid">
                 <div className="column column-alon">
                     <p className="about-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore modi qui libero error ipsam rerum culpa ullam inventore quia eius iusto harum, quos nisi reprehenderit e
+                        My name is Alon, an aspiring web developer. I worked on the mail app
                     </p>
                     <div className="first-circle-container">
                         <div className="circle circle-alon">
@@ -14,7 +14,7 @@ export function About() {
                         <div className="contact">
                             <p>
                                 Contact via mail:
-                                <a href="mailto:avishai.gal@gmail.com">Gmail</a>
+                                <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox">Lorem</a>
                             </p>
 
                             <br />
@@ -65,7 +65,7 @@ export function About() {
                         </div>
                     </div>
                     <p className="about-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore modi qui libero error ipsam rerum culpa ullam inventore quia eius iusto harum, quos nisi reprehenderit e
+                        My name is Avishai, an aspiring web developer. I worked on the note app
                     </p>
                 </div>
             </div>
