@@ -69,3 +69,8 @@
 .gmail-message-footer button:hover {
     background-color: #1558c0;
 }
+
+.sender-details {
+    display: flex;
+    justify-content: space-between;
+}

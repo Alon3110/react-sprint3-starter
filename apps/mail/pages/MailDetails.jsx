@@ -24,8 +24,10 @@ export function MailDetails({ mailId, setMailId }) {
         <section className="gmail-message">
             <header className="gmail-message-header">
                 <span className="email-subject">{mail.subject}</span>
-                <p className="email-sender">{mail.from}</p>
+                <div className="sender-details">
+                <p className="email-sender">From: {mail.from}</p>
                 <p className="email-date">{new Date(mail.sentAt).toLocaleString()}</p>
+                </div>
             </header>
 
             <main className="gmail-message-body">
@@ -33,7 +35,7 @@ export function MailDetails({ mailId, setMailId }) {
             </main>
 
             <footer className="gmail-message-footer">
-                <p className="email-footer-info">This message sent to: {mail.to}, from {mail.from}</p>
+                <p className="email-footer-info">This message sent to: {mail.to}</p>
                 <button onClick={() => setMailId(null)}>Back</button>
 
             </footer>
