@@ -9,16 +9,18 @@ export function MailList({
     isMenuOpen,
     onToggleRead
 }) {
+    console.log(mails);
+    
 
     return (
         <article className="mail-list">
 
             <div className={`side-bar ${isMenuOpen ? 'open' : ''}`}>
                 <button className="compose-btn" onClick={() => setAddNewMail(true)}>Compose</button>
-                <p>Inbox</p>
-                <p>Sent</p>
-                <p>Stared</p>
-                <p>Draft</p>
+                <button>Inbox</button>
+                <button>Sent</button>
+                <button>Stared</button>
+                <button>Draft</button>
             </div>
             <ul>
                 {mails.map(mail => (
