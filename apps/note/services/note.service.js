@@ -12,6 +12,7 @@ export const noteService = {
     save,
     getEmptyNote,
     createTodo,
+    getEmbedUrl,
 }
 
 // function query() {
@@ -119,11 +120,11 @@ function _createNotes() {
     }
 }
 
-function _createTodo(txt) {
-    return {
-        id: makeId(),
-        txt,
-        isActive: true,
-    }
+function getEmbedUrl(url) {
+  if (!url) return ''
+  const youtubeMatch = url.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([^&]+)/)
+  if (youtubeMatch) {
+    return `https://www.youtube.com/embed/${youtubeMatch[1]}`
+  }
+  return url
 }
-

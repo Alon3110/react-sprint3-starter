@@ -16,6 +16,9 @@ export function NoteVideoPreview({ note, onRemoveNote, onSetNoteColor }) {
         setNotePin(prev => !prev)
     }
 
+    // console.log('hi from VideoPreview',info.url);
+
+
     return (
         <div className="note" style={{ backgroundColor: style.backgroundColor }}>
             <h1>{info.title}</h1>
