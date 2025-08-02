@@ -20,5 +20,27 @@ export const demoData = [
         removedAt: null,
         from: 'pomo@pomo.com',
         to: 'user@appsus.com',
+    },
+    {
+        id: 'e102',
+        createdAt: 1551133930501,
+        subject: 'Make pasta!',
+        body: 'Would you like to make pasta?',
+        isRead: false,
+        sentAt: 1531133930594,
+        removedAt: null,
+        from: 'user@appsus.com',
+        to: 'pomo@pomo.com',
+    },
+    {
+        id: 'e102',
+        createdAt: 1551133930501,
+        subject: 'Make pasta!',
+        body: 'Would you like to make pasta?',
+        isRead: false,
+        sentAt: 1531133930594,
+        removedAt: null,
+        from: 'user@appsus.com',
+        to: 'pomo@pomo.com',
     }
 ]
