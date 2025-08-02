@@ -17,7 +17,8 @@ export const mailService = {
     getDefaultFilter,
     addReview,
     _setNextprevMailId,
-    getFilterFromSearchParams
+    getFilterFromSearchParams,
+    sortBy
 }
 
 function query(filterBy = {}) {
@@ -81,22 +82,28 @@ function getEmptyMail() {
         sentAt: null,
     }
 }
-// function getEmptyMail(title = '', amount = '', description = '', pageCount = '', language = 'en', authors = '') {
-//     return {
-//         title,
-//         authors,
-//         description,
-//         pageCount,
-//         thumbnail: `/assets/mailsImages/15.jpg`,
-//         language,
-//         listPrice: {
-//             amount,
-//             currencyCode: "EUR",
-//             isOnSale: Math.random() > 0.7
-//         },
-//         reviews: []
-//     }
-// }
+
+function _loadMails() {
+return utilService.loadFromStorage(MAIL_KEY) || []
+}
+
+function sortBy({ txt = '', sortField = 'date', sortDir = -1 } = {}) {
+  let mails = _loadMails()          
+
+  if (txt) {
+    const re = new RegExp(txt, 'i')
+    mails = mails.filter(m => re.test(m.subject) || re.test(m.body))
+  }
+
+  if (sortField === 'title') {
+    mails.sort((a, b) => a.subject.localeCompare(b.subject) * sortDir)
+  } else if (sortField === 'date') {
+    mails.sort((a, b) => (a.sentAt - b.sentAt) * sortDir) // sentAt = timestamp/Date
+  }
+
+  return Promise.resolve(mails)
+}
+
 
 function getDefaultFilter(filterBy = { subject: '', body: '', from: '', to: ''}) {
     return { subject: filterBy.subject, body: filterBy.body, from: filterBy.from, to: filterBy.to}

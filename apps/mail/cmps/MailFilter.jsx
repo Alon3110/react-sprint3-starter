@@ -1,7 +1,7 @@
 const { useState, useEffect } = React
 const { useParams, useNavigate, Link } = ReactRouterDOM
 
-export function MailFilter({ defaultFilter, handleSetFilter, toggleMenu }) {
+export function MailFilter({ defaultFilter, handleSetFilter, toggleMenu, sortBy, onUpdate }) {
     const [filterByToEdit, setFilterByToEdit] = useState(defaultFilter)
 
     useEffect(() => {
@@ -12,6 +12,14 @@ export function MailFilter({ defaultFilter, handleSetFilter, toggleMenu }) {
         const field = target.name
         const value = target.value
         setFilterByToEdit(prev => ({ ...prev, [field]: value }))
+    }
+
+    function handleSort({ target }) {
+        const { name, value } = target
+        onUpdate(prev => ({
+            ...prev,
+            [name]: name === 'sortDir' ? +value : value
+        }))
     }
 
     const { subject } = filterByToEdit
@@ -29,6 +37,36 @@ export function MailFilter({ defaultFilter, handleSetFilter, toggleMenu }) {
                     type="text"
                     placeholder="Search mail"
                 />
+
+                <select
+                    name="sortField"
+                    value={sortBy.sortField}
+                    onChange={handleSort}
+                    className="sort-field"
+                >
+                    <option value="date">Date</option>
+                    <option value="title">Title (A→Z)</option>
+                </select>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="sortDir"
+                        value="1"
+                        checked={sortBy.sortDir === 1}
+                        onChange={handleSort}
+                    />
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="sortDir"
+                        value="-1"
+                        checked={sortBy.sortDir === -1}
+                        onChange={handleSort}
+                    />
+                </label>
             </form>
         </section>
     )

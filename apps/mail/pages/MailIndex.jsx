@@ -16,9 +16,16 @@ export function MailIndex() {
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+    const [sortBy, setSortBy] = useState({
+        txt: '',
+        sortField: 'date',
+        sortDir: -1
+    })
+
     useEffect(() => {
-        loadMails()
-    }, [filterBy])
+        const params = { ...sortBy, txt: filterBy.subject }
+        mailService.sortBy(params).then(setMails)
+    }, [filterBy, sortBy])
 
     function loadMails() {
         mailService.query(filterBy)
@@ -85,8 +92,11 @@ export function MailIndex() {
 
     function handleSendMail(newMail) {
         mailService.save(newMail).then(() => {
-            loadMails()
-            setAddNewMail(false)
+            mailService
+                .sortBy({ ...sortBy, txt: filterBy.subject })
+                .then(setMails)
+
+            setAddNew(false)
         })
     }
 
@@ -100,9 +110,9 @@ export function MailIndex() {
         <section className="main-layout">
             <div className="container">
                 <header className="main-header">
-                <p className="logo">Gmail</p>
-                <img src="/apps/mail/img/gmail-logo.png" alt="" />
-                {!selectedMailId && <MailFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} toggleMenu={toggleMenu} />}
+                    <p className="logo">Gmail</p>
+                    <img src="/apps/mail/img/gmail-logo.png" alt="" />
+                    {!selectedMailId && <MailFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} toggleMenu={toggleMenu} sortBy={sortBy} onUpdate={setSortBy} />}
                 </header>
                 {selectedMailId && <MailDetails mailId={selectedMailId} setMailId={setMailId} />}
                 <div>
