@@ -3,6 +3,7 @@
     position: relative;
     width: 100%;
     padding: 1rem;
+    margin-block-end: 1rem;
     border-radius: 0.5rem;
     outline: 1px solid var(--bg1);
 }
@@ -11,10 +12,21 @@
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
 
+.btn-note-bar {
+    display: flex;
+}
+
+.btn-note-bar .btns-app {
+    margin-inline-end: 1rem;
+}
+
 .note h1,
-.note ul,
-.note p {
+.note ul {
     margin-block-end: 0.5rem;
+}
+
+.note p {
+    margin-block-end: 0.8rem;
 }
 
 .note li {
@@ -23,6 +35,7 @@
 
 .todos-list {
     margin-inline-start: 1rem;
+    margin-block-end: 1rem;
     list-style-type: circle;
 }
 
@@ -31,16 +44,16 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s ease;
+    border-radius: 50%;
 }
 
 .note:hover .btns-app {
-  opacity: 1;
-  pointer-events: auto;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .note .pin-note {
     position: absolute;
-
     inset-inline-end: 1rem;
     inset-block-start: 1rem;
 
