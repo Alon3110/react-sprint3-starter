@@ -1,4 +1,5 @@
 .note {
+    display: grid;
     position: relative;
     width: 100%;
     padding: 1rem;
@@ -25,8 +26,24 @@
     list-style-type: circle;
 }
 
-.btns-app {
+.note .btns-app {
     height: 1.2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.note:hover .btns-app {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.note .pin-note {
+    position: absolute;
+
+    inset-inline-end: 1rem;
+    inset-block-start: 1rem;
+
 }
 
 .color-input {
@@ -46,13 +63,16 @@
     place-items: center;
 }
 
-/* content */
+/* MAIN CONTENT */
 
 .note-image-container {
     width: 150px;
     height: 150px;
 }
 
-.note-img {
+.note-image-container,
+.note-video {
+    margin-block-end: 1rem;
+    justify-self: center;
     object-fit: contain;
 }

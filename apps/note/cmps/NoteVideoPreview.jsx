@@ -30,8 +30,8 @@ export function NoteVideoPreview({ note, onRemoveNote, onSetNoteColor }) {
                 alt={notePin ? "Pinned" : "Not Pinned"}
                 className="btns-app pin-note"
                 onClick={onTogglePinned} />
-            <iframe width="420" height="315"
-                src={info.url}>
+            <iframe width="250" height="200"
+                src={info.url} className="note-video">
             </iframe>
             <div className="btn-note-bar">
                 <img src="../../assets/img/svgs/colors-black.svg" alt=""

@@ -1,30 +1,30 @@
 .note-filter {
+    display: grid;
+    margin-inline-start: 1rem;
     background-color: var(--gray1);
-    padding-block: 1em;
-    display: grid;
 }
- 
-.note-filter form, .search-bar {
-    grid-template-columns: 100px 200px;
-    gap: .5em;
+
+.note-filter form,
+.note-index .search-bar {
     display: grid;
-    height: 100%;
+    grid-template-columns: 100px 200px;
+    gap: 0.5em;
 }
 
 .search-note-txt {
     align-items: center;
 }
 
-.search-bar {
+.note-index .search-bar {
     max-height: 3.75rem;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
-    margin: 1rem;
-    font-size: 0.9rem;
-    line-height: 1.2;
 
     background-color: #fff;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    line-height: 1.2;
+    font-size: 0.9rem;
+    
     opacity: 0.8;
     border: none;
     outline: none;
