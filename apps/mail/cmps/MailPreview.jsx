@@ -1,8 +1,10 @@
 const { useState, useEffect } = React
 
-export function MailPreview({ mail, onRemove, onToggleRead }) {
-    
+export function MailPreview({ mail, onRemove, onToggleRead, onToggleStar }) {
+
     const [mailRead, setMailRead] = useState(mail.isRead)
+    const displayAddress =
+     mail.to === 'user@appsus.com' ? mail.from : mail.to
 
     useEffect(() => setMailRead(mail.isRead), [mail.isRead])
 
@@ -15,11 +17,30 @@ export function MailPreview({ mail, onRemove, onToggleRead }) {
     return (
         <div className="details">
             <div className="content">
-                <h2>{mail.to}</h2>
-                <h4>
-                    {mail.subject} <span>{mail.body}</span>
-                </h4>
-                <p>{new Date(mail.sentAt).toLocaleString()}</p>
+                <div className="star-btn">
+                    <button
+                        className="star"
+                        onClick={ev => {
+                            ev.stopPropagation()
+                            onToggleStar(mail.id)
+                        }}
+                    >
+                        <i
+                            className={
+                                mail.isStarred
+                                    ? 'fa-solid fa-star'
+                                    : 'fa-regular fa-star'
+                            }
+                        ></i>
+                    </button>
+                </div>
+                <div className="mail-details">
+                    <h2>{displayAddress}</h2>
+                    <h4>
+                        {mail.subject} <span>{mail.body}</span>
+                    </h4>
+                    <p>{new Date(mail.sentAt).toLocaleString()}</p>
+                </div>
             </div>
 
             <div className="preview-btn">

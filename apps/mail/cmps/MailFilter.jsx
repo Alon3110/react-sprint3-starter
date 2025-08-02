@@ -36,36 +36,16 @@ export function MailFilter({ defaultFilter, handleSetFilter, sortBy, onUpdate })
                     type="text"
                     placeholder="Search mail"
                 />
-
+                
                 <select
                     name="sortField"
                     value={sortBy.sortField}
                     onChange={handleSort}
                     className="sort-field"
-                >
+                > 
                     <option value="date">Date</option>
-                    <option value="title">Title (A→Z)</option>
+                    <option value="title">Title</option>
                 </select>
-
-                <label>
-                    <input
-                        type="radio"
-                        name="sortDir"
-                        value="1"
-                        checked={sortBy.sortDir === 1}
-                        onChange={handleSort}
-                    />
-                </label>
-
-                <label>
-                    <input
-                        type="radio"
-                        name="sortDir"
-                        value="-1"
-                        checked={sortBy.sortDir === -1}
-                        onChange={handleSort}
-                    />
-                </label>
             </form>
         </section>
     )

@@ -1,26 +1,16 @@
 .mail-list {
     display: flex;
+    justify-self: center;
+    margin-left: 0;
     width: 100%;
     background-color: var(--bg-index);
-    border-top: 1px solid var(--line-seperator);
 }
 
 .mail-list ul {
-    width: 85vw;
+    width: 100%;
     list-style: none;
     padding: 0;
     margin: 0;
-}
-
-.cell {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 24px;
-    border-bottom: 1px solid var(--line-seperator);
-    background-color: var(--bg-side-bar);
-    cursor: pointer;
-    height: 40px;
 }
 
 .cell:hover {
@@ -32,11 +22,24 @@
 .cell:hover .preview-btn {
     display: flex;
     justify-content: center;
-    align-content: center;
 }
 
 .cell.read {
     font-weight: normal;
+}
+
+.cell.read .mail-details h2 {
+    font-weight: normal;
+}
+
+.cell.read .mail-details h4 {
+    font-weight: normal;
+}
+
+.cell span,
+.cell h4 {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .side-bar {
@@ -53,3 +56,34 @@
     transition: transform 0.6s, box-shadow 0.6s;
     z-index: 6;
 }
+
+.side-bar-btn {
+    display: flex;
+    flex-direction: column;
+}
+
+.side-bar-btn button {
+    border: none;
+    height: 30px;
+    cursor: pointer;
+}
+
+.side-bar-btn button:hover {
+    border-bottom-right-radius: 20px;
+    border-start-end-radius: 20px;
+    background-color: var(--side-bar-btn);
+}
+
+.compose-btn {
+        position: static;
+        background-color: var(--bg-compose-btn);
+        color: var(--color-primary-txt);
+        border: none;
+        height:60px;
+        padding: 0.6em 1.4em;
+        border-radius: 15px;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-bottom: 1rem;
+        transition: background-color 0.2s ease;
+    }

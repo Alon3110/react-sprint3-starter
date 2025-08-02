@@ -14,7 +14,7 @@ export function MailIndex() {
     const [addNewMail, setAddNewMail] = useState(false)
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
     const [isMenuOpen, setIsMenuOpen] = useState(false)
-    const [mailbox, setMailbox] = useState('inbox')   // ► NEW (default Inbox)
+    const [mailbox, setMailbox] = useState('inbox')
 
     const [sortBy, setSortBy] = useState({
         txt: '',
@@ -27,23 +27,26 @@ export function MailIndex() {
         mailService.sortBy(params).then(setMails)
     }, [filterBy, sortBy])
 
-    useEffect(() => {
-        if (Array.isArray(mails)) {
-            setReadCount(mails.filter(mail => !mail.isRead).length)
-        }
-    }, [mails])
-
     const displayedMails = useMemo(() => {
         if (!Array.isArray(mails)) return []
         switch (mailbox) {
             case 'inbox':
-                return mails.filter(mail => mail.to === 'user@appsus.com')
+                return mails.filter(mail => mail.to === 'user@appsus.com' && !mail.removedAt)
             case 'sent':
-                return mails.filter(mail => mail.from === 'user@appsus.com')   // ► task rule
+                return mails.filter(mail => mail.from === 'user@appsus.com' && !mail.removedAt)
+            case 'trash':
+                return mails.filter(mail => mail.removedAt)
+            case 'starred':
+                return mails.filter(m => m.isStarred && !m.removedAt)
             default:
                 return mails
         }
     }, [mails, mailbox])
+
+    useEffect(() => {
+        const unread = displayedMails.filter(mail => !mail.isRead).length
+        setReadCount(unread)
+    }, [displayedMails])
 
     function toggleRead(mailId) {
         setMails(prev => prev.map(mail =>
@@ -52,13 +55,37 @@ export function MailIndex() {
         if (changed) mailService.save({ ...changed, isRead: !changed.isRead })
     }
 
+    function toggleStar(mailId) {
+        setMails(prev =>
+            prev.map(m =>
+                m.id === mailId ? { ...m, isStarred: !m.isStarred } : m
+            )
+        )
+        const t = mails.find(m => m.id === mailId)
+        if (t) mailService.save({ ...t, isStarred: !t.isStarred })
+    }
+
     function removeMail(mailId) {
-        mailService.remove(mailId)
-            .then(() => {
-                setMails(prev => prev.filter(mail => mail.id !== mailId))
-                showSuccessMsg('Mail removed')
+        if (mailbox === 'trash') {
+            mailService.remove(mailId).then(() => {
+                setMails(prev => prev.filter(m => m.id !== mailId))
+                showSuccessMsg('Mail deleted')
             })
-            .catch(() => showErrorMsg("Couldn't remove mail"))
+                .catch(() => showErrorMsg("Couldn't delete mail"))
+            return
+        }
+        setMails(prev =>
+            prev.map(m =>
+                m.id === mailId ? { ...m, removedAt: Date.now() } : m
+            )
+
+        )
+        const target = mails.find(m => m.id === mailId)
+        if (target && !target.removedAt) {
+            mailService.save({ ...target, removedAt: Date.now() })
+            showSuccessMsg('Moved to Trash')
+        }
+
     }
 
     function markAsRead(mailId) {
@@ -71,7 +98,7 @@ export function MailIndex() {
     function handleSendMail(newMail) {
         mailService.save(newMail).then(() => {
             mailService.sortBy({ ...sortBy, txt: filterBy.subject }).then(setMails)
-            setAddNewMail(false)         
+            setAddNewMail(false)
         })
     }
 
@@ -81,9 +108,9 @@ export function MailIndex() {
         <section className="main-layout">
             <div className="container">
                 <header className="main-header">
-                    <button className="btn-toggle-menu" onClick={() => setIsMenuOpen(p => !p)}>☰</button>
-                    <p className="logo">Gmail</p>
+                    {!selectedMailId && (<button className="btn-toggle-menu" onClick={() => setIsMenuOpen(p => !p)}>☰</button>)}
                     <img src="/apps/mail/img/gmail-logo.png" alt="" />
+                    
                     {!selectedMailId && (
                         <MailFilter
                             defaultFilter={filterBy}
@@ -102,15 +129,16 @@ export function MailIndex() {
 
                 {!selectedMailId && (
                     <MailList
-                        mails={displayedMails}        
+                        mails={displayedMails}
                         onRead={markAsRead}
                         onRemove={removeMail}
                         setMailId={setMailId}
                         setAddNewMail={setAddNewMail}
                         isMenuOpen={isMenuOpen}
                         onToggleRead={toggleRead}
-                        onSelectBox={setMailbox}      
+                        onSelectBox={setMailbox}
                         activeBox={mailbox}
+                        onToggleStar={toggleStar}
                     />
                 )}
 
@@ -125,133 +153,3 @@ export function MailIndex() {
         </section>
     )
 }
-
-
-// import { mailService } from "../services/mail.service.js"
-// import { MailList } from "../cmps/MailList.jsx"
-// import { MailFilter } from "../cmps/MailFilter.jsx"
-// import { MailDetails } from "./MailDetails.jsx"
-// import { MailEdit } from "./MailEdit.jsx"
-// import { showSuccessMsg, showErrorMsg } from "../../../services/event-bus.service.js"
-
-// const { useState, useEffect } = React
-// const { Link, Outlet } = ReactRouterDOM
-
-// export function MailIndex() {
-//     const [mails, setMails] = useState(null)
-//     const [readCount, setReadCount] = useState(0)
-//     const [selectedMailId, setMailId] = useState(null)
-//     const [addNewMail, setAddNewMail] = useState(false)
-//     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
-//     const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-//     const [sortBy, setSortBy] = useState({
-//         txt: '',
-//         sortField: 'date',
-//         sortDir: -1
-//     })
-
-//     useEffect(() => {
-//         const params = { ...sortBy, txt: filterBy.subject }
-//         mailService.sortBy(params).then(setMails)
-//     }, [filterBy, sortBy])
-
-//     function loadMails() {
-//         mailService.query(filterBy)
-//             .then(mails => {
-//                 setMails(mails)
-//             })
-//             .catch(err => console.log('err:', err))
-//     }
-
-//     useEffect(() => {
-//         if (Array.isArray(mails)) updateReadCount(mails)
-//     })
-
-//     function updateReadCount() {
-//         if (!Array.isArray(mails)) return
-//         const count = mails.filter(mail => !mail.isRead).length
-//         setReadCount(count)
-//     }
-
-//     function toggleRead(mailId) {
-//         setMails(prev =>
-//             prev.map(mail =>
-//                 mail.id === mailId ? { ...mail, isRead: !mail.isRead } : mail
-//             )
-//         )
-//         const changed = mails.find(mail => mail.id === mailId)
-//         if (changed) mailService.save({ ...changed, isRead: !changed.isRead })
-//     }
-
-//     function removeMail(mailId) {
-//         mailService.remove(mailId)
-//             .then(() => {
-//                 setMails(prevMails => prevMails.filter(mail => mailId !== mail.id))
-//                 showSuccessMsg('Mail has been successfully removed!')
-//             })
-//             .catch(() => {
-//                 showErrorMsg(`couldn't remove book`)
-//                 navigate('/book')
-//             })
-//     }
-
-//     function markAsRead(mailId) {
-//         let updatedMail = null
-
-//         const updatedMails = mails.map(mail => {
-//             if (mail.id === mailId && !mail.isRead) {
-//                 updatedMail = { ...mail, isRead: true }
-//                 return updatedMail
-//             } else {
-//                 return mail
-//             }
-//         })
-
-//         setMails(updatedMails)
-
-//         if (updatedMail) {
-//             mailService.save(updatedMail)
-//         }
-//     }
-
-//     function toggleMenu() {
-//         setIsMenuOpen(prev => !prev)
-//     }
-
-//     function handleSendMail(newMail) {
-//         mailService.save(newMail).then(() => {
-//             mailService
-//                 .sortBy({ ...sortBy, txt: filterBy.subject })
-//                 .then(setMails)
-
-//             setAddNew(false)
-//         })
-//     }
-
-//     function handleSetFilter(newFilterBy) {
-//         setFilterBy(prevFilter => ({ ...prevFilter, ...newFilterBy }))
-//     }
-
-//     if (!mails) return <div>Loading...</div>
-
-//     return (
-//         <section className="main-layout">
-//             <div className="container">
-//                 <header className="main-header">
-//                     <button className="btn-toggle-menu" type="button" onClick={toggleMenu}>☰</button>
-//                     <p className="logo">Gmail</p>
-//                     <img src="/apps/mail/img/gmail-logo.png" alt="" />
-//                     {!selectedMailId && <MailFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} sortBy={sortBy} onUpdate={setSortBy} />}
-//                 </header>
-//                 {selectedMailId && <MailDetails mailId={selectedMailId} setMailId={setMailId} />}
-//                 <div>
-//                     <p>{readCount} Mails to read</p>
-//                 </div>
-//                 {!selectedMailId && <MailList mails={mails} onRead={markAsRead} onRemove={removeMail} setMailId={setMailId} setAddNewMail={setAddNewMail} isMenuOpen={isMenuOpen} onToggleRead={toggleRead} />}
-//                 {isMenuOpen && <div className="screen-overlay" onClick={() => toggleMenu(false)}></div>}
-//                 {addNewMail && (<MailEdit onClose={() => setAddNewMail(false)} onSend={handleSendMail} />)}
-//             </div>
-//         </section>
-//     )
-// }

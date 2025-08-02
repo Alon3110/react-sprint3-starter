@@ -1,0 +1,128 @@
+@media (max-width: 900px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .container img {
+        display: none;
+    }
+
+    .search-bar {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .search-bar input {
+        width: 85vw;
+    }
+
+    .sort-field {
+        position: absolute;
+        margin-left: 230px;
+    }
+
+    .mail-details {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 900px) {
+
+    .container img {
+        width: 120px;
+        height: 40px;
+    }
+
+    .main-header {
+        align-items: center;
+    }
+
+    #subject {
+        margin-left: 20px;
+    }
+
+    .btn-toggle-menu {
+        margin-bottom: 5px;
+        width: 3rem;
+        height: 3rem;
+        font-size: 2rem;
+        border-radius: 50%;
+        border: none;
+        background-color: none;
+    }
+
+    .cell {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 24px;
+        border-bottom: 1px solid var(--line-seperator);
+        background-color: var(--bg-side-bar);
+        cursor: pointer;
+        height: 40px;
+    }
+
+    .side-bar {
+        margin-top: 150px;
+        left: 0;
+        height: 70dvh;
+        min-width: 200px;
+        background-color: var(--bg-index);
+        border-inline-end: 1px solid #ccc;
+        transition: transform 0.2s ease;
+        transform: translateX(-100%);
+    }
+
+    .side-bar.open {
+        display: flex;
+        margin-top: 0;
+        position: static;
+        transform: none;
+    }
+
+    .screen-overlay {
+        display: none;
+    }
+
+    .sort-field {
+        position: absolute;
+        margin-left: 420px;
+    }
+
+    .mail-details {
+        display: flex;
+        flex: 1 1 0;
+        min-width: 0;
+        gap: 0.75rem;
+        margin-left: 100px;
+        align-items: center;
+    }
+
+    .mail-details h2 {
+        max-width: 180px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .mail-details h4 {
+        flex: 1 1 0;
+        min-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0;
+        font-weight: 400;
+    }
+
+    .mail-details p {
+        margin: 0 40px 0 auto;
+        white-space: nowrap;
+    }
+
+}

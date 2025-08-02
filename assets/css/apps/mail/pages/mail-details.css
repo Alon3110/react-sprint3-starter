@@ -7,9 +7,9 @@
     padding: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
+    z-index: 5;
 }
 
-/* Header area */
 .gmail-message-header {
     padding: 24px 32px 16px;
     border-bottom: 1px solid var(--line-seperator);

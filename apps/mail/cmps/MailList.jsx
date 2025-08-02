@@ -9,12 +9,14 @@ export function MailList({
   isMenuOpen,
   onToggleRead,
   onSelectBox,   
-  activeBox      
+  activeBox,
+  onToggleStar      
 }) {
   return (
     <article className="mail-list">
       <div className={`side-bar ${isMenuOpen ? 'open' : ''}`}>
-        <button className="compose-btn" onClick={() => setAddNewMail(true)}>Compose</button>
+        <button className="compose-btn" onClick={() => setAddNewMail(true)}><i className="fa-solid fa-pen"></i> Compose</button>
+    <div className="side-bar-btn">
 
         <button
           className={activeBox === 'inbox' ? 'active' : ''}
@@ -29,9 +31,20 @@ export function MailList({
         >
           Sent
         </button>
+        <button
+            className={activeBox === 'trash' ? 'active' : ''}
+            onClick={() => onSelectBox('trash')}
+            >
+            <i className="fa-solid fa-trash-can"></i> Trash
+       </button>
 
-        <button disabled>Stared</button>
-        <button disabled>Draft</button>
+        <button
+          className={activeBox === 'starred' ? 'active' : ''}
+          onClick={() => onSelectBox('starred')}
+        >
+          <i className="fa-regular fa-star"></i> Starred
+        </button>
+          </div>
       </div>
 
       <ul>
@@ -49,6 +62,7 @@ export function MailList({
               onRemove={onRemove}
               onRead={onRead}
               onToggleRead={onToggleRead}
+              onToggleStar={onToggleStar}
             />
           </li>
         ))}
@@ -56,46 +70,3 @@ export function MailList({
     </article>
   )
 }
-
-// import { MailPreview } from "./MailPreview.jsx";
-
-// export function MailList({
-//     mails,
-//     onRead,
-//     onRemove,
-//     setMailId,
-//     setAddNewMail,
-//     isMenuOpen,
-//     onToggleRead
-// }) {
-//     console.log(mails);
-    
-
-//     return (
-//         <article className="mail-list">
-
-//             <div className={`side-bar ${isMenuOpen ? 'open' : ''}`}>
-//                 <button className="compose-btn" onClick={() => setAddNewMail(true)}>Compose</button>
-//                 <button>Inbox</button>
-//                 <button>Sent</button>
-//                 <button>Stared</button>
-//                 <button>Draft</button>
-//             </div>
-//             <ul>
-//                 {mails.map(mail => (
-//                     <li
-//                         key={mail.id}
-//                         className={`cell ${mail.isRead ? 'read' : ''}`}
-//                         onClick={() => {
-//                             setMailId(mail.id)
-//                             onRead(mail.id)
-//                         }}
-//                     >
-//                         <MailPreview mail={mail} onRemove={onRemove} onRead={onRead} onToggleRead={onToggleRead} />
-
-//                     </li>
-//                 ))}
-//             </ul>
-//         </article>
-//     )
-// }
