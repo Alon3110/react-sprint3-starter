@@ -45,11 +45,17 @@ function remove(mailId) {
 }
 
 function save(mail) {
-    if (mail.id) {
-        return storageService.put(MAIL_KEY, mail)
-    } else {
-        return storageService.post(MAIL_KEY, mail)
-    }
+  const savedMail = mail.id ? storageService.put(MAIL_KEY, mail)
+                     : storageService.post(MAIL_KEY, mail)
+
+  return savedMail.then(savedMail => {
+    return storageService.query(MAIL_KEY).then(allMails => {
+      utilService.saveToStorage(MAIL_KEY, allMails)   
+      console.log('save');
+      
+      return savedMail                                
+    })
+  })
 }
 
 function addReview(mailId, review) {
