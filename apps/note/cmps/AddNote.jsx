@@ -42,7 +42,7 @@ export function AddNote({ setNotes }) {
         ev.preventDefault()
         if (!noteToEdit) return
         const tasks = noteToEdit.split(',').map(txt => txt.trim()).filter(txt => txt)
-        const todoToSave = noteService.getEmptyNote('NoteTodo')  
+        const todoToSave = noteService.getEmptyNote('NoteTodo')
         const todos = noteService.createTodo(tasks)
         todoToSave.info.todos = todos
         todoToSave.createdAt = Date.now()
@@ -106,13 +106,44 @@ export function AddNote({ setNotes }) {
                     />
                     {isExpanded && (
                         <div className="note-actions">
-                            <img src="../../assets/img/svgs/new-list.svg" alt="" className="btns-app" onClick={() => setNoteType('NoteTodo')}/>
+                            <img src="../../assets/img/svgs/new-list.svg" alt="" className="btns-app" onClick={() => setNoteType('NoteTodo')} />
                             <button type="submit">Close</button>
                         </div>
                     )}
                 </form>
             )}
+            {/* {noteType === 'NoteVideo' && (
+                <form onSubmit={onSaveNote}>
+                    {isExpanded && (
+                        <input
+                            onChange={handleTxtChange}
+                            type="text"
+                            id="title"
+                            name="title"
+                            placeholder="Title"
+                            value={noteToEdit.info.title}
+                            className="note-title-input"
+                        />
+                    )} */}
+                    {/* <textarea
+                        onClick={() => setIsExpanded(true)}
+                        onChange={handleTxtChange}
+                        id="txt"
+                        name="txt"
+                        placeholder="Take a note..."
+                        value={noteToEdit.info.txt}
+                        className="note-textarea"
+                        rows={isExpanded ? 3 : 1}
+                    /> */}
 
+                    {/* {isExpanded && (
+                        <div className="note-actions">
+                            <img src="../../assets/img/svgs/new-list.svg" alt="" className="btns-app" onClick={() => setNoteType('NoteVideo')} />
+                            <button type="submit">Close</button>
+                        </div>
+                    )}
+                </form>
+            )} */}
             {noteType === 'NoteTodo' && isExpanded && (
                 <form onSubmit={onSaveTodo}>
                     <input

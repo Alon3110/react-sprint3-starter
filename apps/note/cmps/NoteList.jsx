@@ -1,5 +1,7 @@
 import { NoteTxtPreview } from "./NoteTxtPreview.jsx"
 import { NoteTodosPreview } from "./NoteTodosPreview.jsx"
+import { NoteVideoPreview } from "./NoteVideoPreview.jsx"
+import { NoteImagePreview } from "./NoteImagePreview.jsx"
 
 export function NoteList({ notes, onRemoveNote, onSetNoteColor }) {
 
@@ -17,6 +19,8 @@ function DynamicCmp(props) {
     const dynamicCmpMap = {
         NoteTxt: <NoteTxtPreview {...props} />,
         NoteTodo: <NoteTodosPreview {...props} />,
+        NoteVideo: <NoteVideoPreview {...props} />,
+        NoteImage: <NoteImagePreview {...props} />,
     }
     return dynamicCmpMap[props.note.type]
 }

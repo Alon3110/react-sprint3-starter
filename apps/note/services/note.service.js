@@ -75,6 +75,32 @@ function getEmptyNote(type) {
                 todos: []
             }
         }
+    } else if (type === 'NoteVideo') {
+                return {
+            type,
+            isPinned: false,
+            style: {
+                backgroundColor: 'transparent'
+            },
+            info: {
+                title: '',
+                txt: '',
+                url: '',
+            }
+        }
+    } else if (type === 'NoteImage') {
+                return {
+            type,
+            isPinned: false,
+            style: {
+                backgroundColor: 'transparent'
+            },
+            info: {
+                title: '',
+                txt: '',
+                src: '',
+            }
+        }
     }
 }
 

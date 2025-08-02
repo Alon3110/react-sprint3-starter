@@ -10,7 +10,9 @@
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
 
-.note h1, .note ul, .note p {
+.note h1,
+.note ul,
+.note p {
     margin-block-end: 0.5rem;
 }
 
@@ -27,7 +29,7 @@
     height: 1.2rem;
 }
 
-.color-input{
+.color-input {
     display: flex;
 }
 
@@ -42,4 +44,15 @@
     cursor: pointer;
     transition: .2s border-width;
     place-items: center;
+}
+
+/* content */
+
+.note-image-container {
+    width: 150px;
+    height: 150px;
+}
+
+.note-img {
+    object-fit: contain;
 }

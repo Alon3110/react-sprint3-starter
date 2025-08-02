@@ -1,6 +1,30 @@
 export const demoData = [
 
     {
+        id: 'n99',
+        createdAt: 1621342300000,
+        type: 'NoteImage',
+        isPinned: true,
+        style: { backgroundColor: '#ffddc1' },
+        info: {
+            title: 'My image!',
+            txt: '',
+            src: '../../../assets/img/note-img/minion.png',
+        }
+    },
+    {
+        id: 'n100',
+        createdAt: 1621342340034,
+        type: 'NoteVideo',
+        isPinned: true,
+        style: { backgroundColor: '#ffddc1' },
+        info: {
+            title: 'My video!',
+            txt: '',
+            url: 'https://www.youtube.com/embed/tgbNymZ7vqY',
+        }
+    },
+    {
         id: 'n101',
         createdAt: 1621342341234,
         type: 'NoteTxt',
@@ -8,7 +32,7 @@ export const demoData = [
         style: { backgroundColor: '#ffddc1' },
         info: {
             title: 'Morning Thoughts',
-            txt: 'Coffee is life. Also, need to water the plants.'
+            txt: 'Coffee is life. Also, need to water the plants.',
         }
     },
     {

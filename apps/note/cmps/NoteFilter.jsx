@@ -44,7 +44,7 @@ export function NoteFilter({ setNotes, onToggleSearch }) {
     return (
         <section className="search-note-txt" ref={wrapperRef}>
             <form onSubmit={(ev) => ev.preventDefault()}>
-                {/* <label htmlFor="txt"></label> */}
+                <label htmlFor="txt"></label>
                 <input onChange={handleChange} value={txt} name="txt" id="txt" type="text" placeholder="Search" className="search-bar" />
             </form>
         </section>
