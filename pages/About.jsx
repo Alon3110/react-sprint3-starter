@@ -34,34 +34,18 @@ export function About() {
 
                     </div>
                 </div>
-
                 <div className="vertical-divider"></div>
-
                 <div className="column column-avishai">
                     <div className="circle-container circle-avishai">
                         <div className="circle">
-                            <img src="../assets/img/avishai-pfp.jpg" alt="Avishai image" />
+                            <img src="/assets/img/avishai-pfp.jpg" alt="Avishai image" />
                             <span>Avishai</span>
                         </div>
                         <div className="contact">
                             <p>
                                 Contact via mail:
-                                <a href="mailto:avishai.gal@gmail.com">Gmail</a>
+                                <a href="mailto:avishai.gal@gmail.com"><img src="../assets/img/svgs/gmail-logo.svg" alt="mail icon" /></a>
                             </p>
-
-                            <br />
-                            <p>
-                                Contact via mail:
-                                <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox">Lorem</a>
-                            </p>
-
-                            <br />
-                            <p>
-                                Contact via mail:
-                                <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox">Lorem</a>
-                            </p>
-                            <br />
-                            <br />
                         </div>
                     </div>
                     <p className="about-text">
@@ -70,5 +54,5 @@ export function About() {
                 </div>
             </div>
         </section>
-    );
+    )
 }
