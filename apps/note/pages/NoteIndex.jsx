@@ -64,7 +64,7 @@ export function NoteIndex() {
         setIsSearch(prev => !prev)
     }
 
-    if (!notes) return <div className="loader">Loading...</div>
+    if (!notes) return <div className="loader note-loader">Loading...</div>
     return (
         <section className="note-index">
             <div className="upper-index-bars">

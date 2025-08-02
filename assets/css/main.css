@@ -1,6 +1,7 @@
 
 /* BASIS */
 @import './basics/vars.css';
+@import './basics/typography.css';
 @import './basics/base.css';
 @import './basics/helpers.css';
 @import './basics/layout.css';

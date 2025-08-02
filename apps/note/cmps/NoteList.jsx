@@ -4,8 +4,9 @@ import { NoteVideoPreview } from "./NoteVideoPreview.jsx"
 import { NoteImagePreview } from "./NoteImagePreview.jsx"
 
 export function NoteList({ notes, onRemoveNote, onSetNoteColor }) {
-
-    if (!notes) return <div className="loader">Loading...</div>
+   
+    if (!notes.length) return <div className="loader note-loader">No notes were found</div>
+    if (!notes) return <div className="loader note-loader">Loading...</div>
     return (<section className="notes-container">
         {notes.map(note => (
             <div key={note.id}>
