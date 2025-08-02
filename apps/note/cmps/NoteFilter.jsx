@@ -1,14 +1,14 @@
 import { utilService } from "../../../services/util.service.js"
 import { noteService } from "../services/note.service.js"
+import { showErrorMsg } from "../../../services/event-bus.service.js"
 
 const { useState, useEffect, useRef } = React
 
-export function NoteFilter({ setNotes }, onToggleSearch ) {
+export function NoteFilter({ setNotes, onToggleSearch }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({ txt: '' })
     const searchNotesDebounce = useRef(utilService.debounce(searchNotes, 500)).current
     const { txt } = filterByToEdit
-    
     const wrapperRef = useRef()
 
     useEffect(() => {
@@ -19,7 +19,6 @@ export function NoteFilter({ setNotes }, onToggleSearch ) {
         function handleClickOutside(event) {
             if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
                 onToggleSearch()
-                resetNote()
             }
         }
         document.addEventListener('mousedown', handleClickOutside)
@@ -43,10 +42,10 @@ export function NoteFilter({ setNotes }, onToggleSearch ) {
     }
 
     return (
-        <section className="search-note-txt">
+        <section className="search-note-txt" ref={wrapperRef}>
             <form onSubmit={(ev) => ev.preventDefault()}>
-                <label htmlFor="txt">Search notes by text</label>
-                <input onChange={handleChange} value={txt} name="txt" id="txt" type="text" />
+                {/* <label htmlFor="txt"></label> */}
+                <input onChange={handleChange} value={txt} name="txt" id="txt" type="text" placeholder="Search" className="search-bar" />
             </form>
         </section>
     )

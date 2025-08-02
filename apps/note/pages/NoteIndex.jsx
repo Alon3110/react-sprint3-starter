@@ -67,17 +67,17 @@ export function NoteIndex() {
     if (!notes) return <div className="loader">Loading...</div>
     return (
         <section className="note-index">
-            <div className="upper-bars">
+            <div className="upper-index-bars">
                 <AddNote setNotes={setNotes} />
+                {isSearch && (
+                    <NoteFilter setNotes={setNotes} onToggleSearch={onToggleSearch} />
+                )}
                 <img
                     src="../../../assets/img/svgs/search.svg"
                     alt=""
                     className="btns-app"
                     onClick={onToggleSearch} />
             </div>
-            {isSearch && (
-                <NoteFilter setNotes={setNotes} onToggleSearch={onToggleSearch} />
-            )}
             <NoteList notes={notes} onRemoveNote={onRemoveNote} onSetNoteColor={onSetNoteColor} />
         </section>
     )
