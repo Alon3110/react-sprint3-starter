@@ -2,7 +2,7 @@
     --bg1: lightblue;
     --bg2: rgb(50, 160, 204);
     --bg3: rgb(89, 134, 206);
-    
+
     --color1: rgb(26, 115, 232);
     --color2: rgb(24, 128, 56);
     --color3: rgb(197, 34, 31);
@@ -13,12 +13,13 @@
 
     /* MAIL-PALLETTE */
     --bg-app-header: rgb(255, 255, 255);
-    --bg-side-bar:  rgb(255, 255, 255);
+    --bg-side-bar: rgb(255, 255, 255);
     --bg-index: rgb(246, 248, 252);
-    --bg-read-mail:rgb(240, 240, 247);
-    --bg-hover: rgb(241, 243, 244);
-    --line-seperator:rgb(230, 230, 230);
-    --color-secondary-txt:rgb(95, 99, 104);
-    --color-primary-txt:rgb(32, 33, 36);
-    --bg-compose-btn:rgb(26, 115, 232);
+    --bg-read-mail: rgb(240, 240, 247);
+    --bg-hover: rgb(255, 255, 255);
+    --line-seperator: rgb(230, 230, 230);
+    --color-secondary-txt: rgb(95, 99, 104);
+    --color-primary-txt: rgb(32, 33, 36);
+    --bg-compose-btn: rgb(26, 115, 232);
+    --side-bar-btn: rgb(234, 235, 238);
 }

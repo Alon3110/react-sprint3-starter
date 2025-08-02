@@ -13,20 +13,20 @@ export function About() {
                         </div>
                         <div className="contact">
                             <p>
-                                Contact via mail:
+                                Contact via:
                                 <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox">Gmail</a>
                             </p>
 
                             <br />
                             <p>
-                                Contact via mail:
-                                <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox">Gmail</a>
+                                Contact via:
+                                <a href="https://www.facebook.com/alon.avrian/">Facebook</a>
                             </p>
 
                             <br />
                             <p>
-                                Contact via mail:
-                                <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox">Gmail</a>
+                                Contact via phone:
+                                <span> +972-58-6800688</span>
                             </p>
                             <br />
                             <br />
@@ -45,20 +45,20 @@ export function About() {
                         </div>
                         <div className="contact">
                             <p>
-                                Contact via mail:
-                                <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox">Gmail</a>
+                                Contact via:
+                                <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox"> Gmail</a>
                             </p>
 
                             <br />
                             <p>
-                                Contact via mail:
-                                <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox">Gmail</a>
+                                Contact via:
+                                <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox"> Facebook</a>
                             </p>
 
                             <br />
                             <p>
-                                Contact via mail:
-                                <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox">Gmail</a>
+                                Contact via:
+                                <span> +972-52-4559097</span>
                             </p>
                             <br />
                             <br />

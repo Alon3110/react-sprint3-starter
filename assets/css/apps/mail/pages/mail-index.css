@@ -16,6 +16,17 @@
     color: var(--color-secondary-txt);
 }
 
+.main-layout img {
+    width: 200px;
+    height: 100px;
+}
+
+.logo {
+    font-family: poppins;
+    font-size: 1.5rem;
+    color: rgb(83, 83, 83);
+}
+
 .compose-btn {
     background-color: var(--bg-compose-btn);
     color: white;

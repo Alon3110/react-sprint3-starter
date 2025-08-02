@@ -37,8 +37,8 @@ export function MailPreview({ mail, onRemove, onToggleRead }) {
                     <i
                         className={
                             mailRead
-                                ? 'fa-solid fa-envelope-open'
-                                : 'fa-solid fa-envelope'
+                                ? 'fa-regular fa-envelope-open'
+                                : 'fa-regular fa-envelope'
                         }
                     ></i>
                 </button>

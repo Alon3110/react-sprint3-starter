@@ -99,10 +99,15 @@ export function MailIndex() {
     return (
         <section className="main-layout">
             <div className="container">
-                <h1>Mail app</h1>
-                <p>{readCount} Mails to read</p>
+                <header className="main-header">
+                <p className="logo">Gmail</p>
+                <img src="/apps/mail/img/gmail-logo.png" alt="" />
                 {!selectedMailId && <MailFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} toggleMenu={toggleMenu} />}
+                </header>
                 {selectedMailId && <MailDetails mailId={selectedMailId} setMailId={setMailId} />}
+                <div>
+                    <p>{readCount} Mails to read</p>
+                </div>
                 {!selectedMailId && <MailList mails={mails} onRead={markAsRead} onRemove={removeMail} setMailId={setMailId} setAddNewMail={setAddNewMail} isMenuOpen={isMenuOpen} onToggleRead={toggleRead} />}
                 {isMenuOpen && <div className="screen-overlay" onClick={() => toggleMenu(false)}></div>}
                 {addNewMail && (<MailEdit onClose={() => setAddNewMail(false)} onSend={handleSendMail} />)}
