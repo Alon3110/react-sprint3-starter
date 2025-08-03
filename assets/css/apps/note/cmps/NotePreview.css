@@ -60,6 +60,22 @@
 
 .color-input {
     display: flex;
+    position: absolute;
+
+    height: 3rem;
+    padding: 5px;
+    border-radius: 0.7rem;
+    background-color: whitesmoke;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        0 8px 16px rgba(0, 0, 0, 0.1);
+
+    bottom: -37px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+
+    align-items: center;
 }
 
 .color-input .item {
@@ -69,10 +85,19 @@
     height: 1.5rem;
     width: 1.5rem;
     border-radius: 50%;
+    border: 1px solid rgba(48, 48, 48, 0.473);
 
     cursor: pointer;
     transition: .2s border-width;
     place-items: center;
+}
+
+.color-input .item:hover {
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.color-input .item.active {
+    border: 1px solid rgba(108, 52, 236, 0.863);
 }
 
 /* MAIN CONTENT */
