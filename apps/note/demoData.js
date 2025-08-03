@@ -9,7 +9,7 @@ export const demoData = [
         info: {
             title: 'My image!',
             txt: '',
-            src: '../../../assets/img/note-img/minion.png',
+            src: 'assets/img/note-img/minion.png',
         }
     },
     {

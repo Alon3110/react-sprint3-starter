@@ -22,8 +22,8 @@ export function NoteVideoPreview({ note, onRemoveNote, onSetNoteColor }) {
             <p>{info.txt}</p>
             <img src={
                 notePin
-                    ? "../../assets/img/svgs/is-pinned.svg"
-                    : "../../assets/img/svgs/is-not-pinned.svg"}
+                    ? "assets/img/svgs/is-pinned.svg"
+                    : "assets/img/svgs/is-not-pinned.svg"}
                 alt={notePin ? "Pinned" : "Not Pinned"}
                 className="btns-app pin-note"
                 onClick={onTogglePinned} />
@@ -31,10 +31,10 @@ export function NoteVideoPreview({ note, onRemoveNote, onSetNoteColor }) {
                 src={info.url} className="note-video">
             </iframe>
             <div className="btn-note-bar">
-                <img src="../../assets/img/svgs/colors-black.svg" alt=""
+                <img src="assets/img/svgs/colors-black.svg" alt=""
                     className="btns-app"
                     onClick={onToggleShowColorPicker} />
-                <img src="../../assets/img/svgs/delete.svg" alt="" className="btns-app" onClick={() => onRemoveNote(id)} />
+                <img src="assets/img/svgs/delete.svg" alt="" className="btns-app" onClick={() => onRemoveNote(id)} />
                 {isOpen && (
                     <NoteColor noteId={id} onSetNoteColor={onSetNoteColor} backgroundColor={style.backgroundColor} />
                 )}

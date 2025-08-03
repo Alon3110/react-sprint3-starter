@@ -74,7 +74,7 @@ import { NoteFilter } from "../cmps/NoteFilter.jsx"
                     <NoteFilter setNotes={setNotes} onToggleSearch={onToggleSearch} />
                 )}
                 <img
-                    src="../../../assets/img/svgs/search.svg"
+                    src="assets/img/svgs/search.svg"
                     alt=""
                     className="btns-app"
                     onClick={onToggleSearch} />

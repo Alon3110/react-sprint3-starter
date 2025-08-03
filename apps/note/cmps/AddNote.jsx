@@ -143,8 +143,8 @@ export function AddNote({ setNotes }) {
                     />
                     {isExpanded && (
                         <div className="note-actions">
-                            <img src="../../assets/img/svgs/new-list.svg" alt="" className="btns-app" onClick={() => setNoteType('NoteTodo')} />
-                            <img src="../../assets/img/svgs/new-image.svg" alt="" className="btns-app" onClick={() => setNoteType('NoteVideo')} />
+                            <img src="assets/img/svgs/new-list.svg" alt="" className="btns-app" onClick={() => setNoteType('NoteTodo')} />
+                            <img src="ssets/img/svgs/new-image.svg" alt="" className="btns-app" onClick={() => setNoteType('NoteVideo')} />
                             <button type="submit">Close</button>
                         </div>
                     )}
@@ -173,7 +173,7 @@ export function AddNote({ setNotes }) {
                             className="note-url-input"
                         />
                         <div className="note-actions">
-                            <img src="../../assets/img/svgs/new-image.svg" alt="" className="btns-app" onClick={() => setNoteType('NoteVideo')} />
+                            <img src="assets/img/svgs/new-image.svg" alt="" className="btns-app" onClick={() => setNoteType('NoteVideo')} />
                             <button type="submit">Close</button>
                         </div>
                     </form>
