@@ -1,1 +1,22 @@
- /* note index */
+.note-index {
+    width: 100vw;
+    height: 100vh;
+    padding-inline-end: 1rem;
+    align-items: start;
+}
+
+.upper-index-bars {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.upper-index-bars .btns-app {
+    height: 2rem;
+}
+
+.note-loader {
+    text-align: center;
+}

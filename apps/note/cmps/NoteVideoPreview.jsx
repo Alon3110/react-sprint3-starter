@@ -2,7 +2,7 @@ import { NoteColor } from "../cmps/NoteColor.jsx"
 
 const { useState } = React
 
-export function NoteTodosPreview({ note, onRemoveNote, onSetNoteColor }) {
+export function NoteVideoPreview({ note, onRemoveNote, onSetNoteColor }) {
 
     const { info, id, style, isPinned } = note
     const [isOpen, setIsOpen] = useState(false)
@@ -19,13 +19,7 @@ export function NoteTodosPreview({ note, onRemoveNote, onSetNoteColor }) {
     return (
         <div className="note" style={{ backgroundColor: style.backgroundColor }}>
             <h1>{info.title}</h1>
-            <ul className="todos-list">
-                {info.todos.map(todo => {
-                    return <li key={`${todo.txt}-${todo.doneAt}`}>
-                        {todo.txt}
-                    </li>
-                })}
-            </ul>
+            <p>{info.txt}</p>
             <img src={
                 notePin
                     ? "assets/img/svgs/is-pinned.svg"
@@ -33,6 +27,9 @@ export function NoteTodosPreview({ note, onRemoveNote, onSetNoteColor }) {
                 alt={notePin ? "Pinned" : "Not Pinned"}
                 className="btns-app pin-note"
                 onClick={onTogglePinned} />
+            <iframe width="250" height="200"
+                src={info.url} className="note-video">
+            </iframe>
             <div className="btn-note-bar">
                 <img src="assets/img/svgs/colors-black.svg" alt=""
                     className="btns-app"

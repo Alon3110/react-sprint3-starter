@@ -2,7 +2,12 @@
     display: flex;
     justify-content: space-between;
     padding: 1em;
-    background: var(--bg1);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.226);
+}
+
+nav {
+    display: flex;
+    align-items: center;
 }
 
 nav a {
@@ -10,7 +15,15 @@ nav a {
 }
 
 nav a.active {
-    color: var(--color1);
     font-weight: bold;
     text-decoration: overline;
+}
+
+.navbar-logo {
+    width: 1.5rem;
+    aspect-ratio: 1;
+}
+
+.app-logo {
+    width: 5rem;
 }

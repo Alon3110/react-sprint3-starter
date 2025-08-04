@@ -12,14 +12,25 @@ export const noteService = {
     save,
     getEmptyNote,
     createTodo,
-    getEmptyTodo,
+    getEmbedUrl,
 }
 
-function query() {
+function query(filterBy = {}) {
     return storageService.query(NOTE_KEY)
+        .then(notes => {
+            if (filterBy.txt) {
+                const regex = new RegExp(filterBy.txt, 'i')
+                notes = notes.filter(note =>
+                    regex.test(note.info.title || '') ||
+                    regex.test(note.info.txt || '') ||
+                    (note.info.todos && note.info.todos.some(todo => regex.test(todo.txt)))
+                )
+            }
+            return notes
+        })
 }
 
-function get(noteId) {    
+function get(noteId) {
     return storageService.get(NOTE_KEY, noteId)
 }
 
@@ -27,7 +38,7 @@ function remove(noteId) {
     return storageService.remove(NOTE_KEY, noteId)
 }
 
-function save(note) {
+function save(note) {    
     if (note.id) {
         return storageService.put(NOTE_KEY, note)
     } else {
@@ -36,13 +47,12 @@ function save(note) {
 }
 
 function getEmptyNote(type) {
-    // add if for every note type
     if (type === 'NoteTxt') {
         return {
             type,
             isPinned: false,
             style: {
-                backgroundColor: '#00d'
+                backgroundColor: 'transparent'
             },
             info: {
                 title: '',
@@ -50,7 +60,44 @@ function getEmptyNote(type) {
             }
         }
     } else if (type === 'NoteTodo') {
-        return ''
+        return {
+            type,
+            isPinned: false,
+            style: {
+                backgroundColor: 'transparent'
+            },
+            info: {
+                title: '',
+                txt: '',
+                todos: []
+            }
+        }
+    } else if (type === 'NoteVideo') {
+                return {
+            type,
+            isPinned: false,
+            style: {
+                backgroundColor: 'transparent'
+            },
+            info: {
+                title: '',
+                txt: '',
+                url: '',
+            }
+        }
+    } else if (type === 'NoteImage') {
+                return {
+            type,
+            isPinned: false,
+            style: {
+                backgroundColor: 'transparent'
+            },
+            info: {
+                title: '',
+                txt: '',
+                src: '',
+            }
+        }
     }
 }
 
@@ -58,18 +105,6 @@ function createTodo(tasks) {
     return tasks.map(task => {
         return { txt: task, doneAt: null }
     })
-}
-
-function getEmptyTodo() {
-    return {
-        type: 'NoteTodo',
-        isPinned: false,
-        info: {
-            title: '',
-            todos: [
-            ]
-        }
-    }
 }
 
 function _createNotes() {
@@ -81,13 +116,11 @@ function _createNotes() {
     }
 }
 
-// NoteTodos
-
-function _createTodo(txt) {
-    return {
-        id: makeId(),
-        txt,
-        isActive: true,
-    }
+function getEmbedUrl(url) {
+  if (!url) return ''
+  const youtubeMatch = url.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([^&]+)/)
+  if (youtubeMatch) {
+    return `https://www.youtube.com/embed/${youtubeMatch[1]}`
+  }
+  return url
 }
-

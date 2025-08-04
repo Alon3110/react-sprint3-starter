@@ -6,6 +6,7 @@ const { useState, useEffect, useRef } = React
 export function AddNote({ setNotes }) {
     const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote('NoteTxt'))
     const [noteType, setNoteType] = useState('NoteTxt')
+
     const [isExpanded, setIsExpanded] = useState(false)
     const wrapperRef = useRef()
 
@@ -24,6 +25,8 @@ export function AddNote({ setNotes }) {
         setNoteToEdit(noteService.getEmptyNote(noteType))
     }
 
+    // change handlers:
+
     function handleTxtChange({ target }) {
         const { name: field, type } = target
         const value = type === 'number' ? +target.value : target.value
@@ -38,12 +41,42 @@ export function AddNote({ setNotes }) {
         setNoteToEdit(value)
     }
 
+    function handleUrlChange({ target }) {
+        const { name: field, value } = target
+        const formattedUrl = noteService.getEmbedUrl(value)
+        setNoteToEdit((prevNote) => ({
+            ...prevNote,
+            info: { ...prevNote.info, [field]: formattedUrl }
+        }))
+    }
+
+    // save functions:
+
+    function onSaveNote(ev) {
+        ev.preventDefault()
+        if (!noteToEdit) return
+
+        const noteToSave = { ...noteToEdit }
+        noteToSave.createdAt = Date.now()
+        noteService.save(noteToSave)
+            .then(savedNote => {
+                setNotes(prevNotes => [savedNote, ...prevNotes])
+                resetNote()
+                setIsExpanded(false)
+            })
+            .catch(err => {
+                console.log('Cannot save note:', err)
+                showErrorMsg('Cannot save note!')
+            })
+    }
+
     function onSaveTodo(ev) {
         ev.preventDefault()
         if (!noteToEdit) return
+
         const tasks = noteToEdit.split(',').map(txt => txt.trim()).filter(txt => txt)
+        const todoToSave = noteService.getEmptyNote('NoteTodo')
         const todos = noteService.createTodo(tasks)
-        const todoToSave = noteService.getEmptyTodo()
         todoToSave.info.todos = todos
         todoToSave.createdAt = Date.now()
 
@@ -59,9 +92,13 @@ export function AddNote({ setNotes }) {
             })
     }
 
-    function onSaveNote(ev) {
+    function onSaveVideo(ev) {
         ev.preventDefault()
-        const noteToSave = { ...noteToEdit }
+        if (!noteToEdit) return
+        const emptyVideoNote = noteService.getEmptyNote('NoteVideo')
+        const noteToSave = { ...emptyVideoNote, ...noteToEdit}
+        // the next line is due to a type value bug:
+        noteToSave.type = 'NoteVideo'
         noteToSave.createdAt = Date.now()
 
         noteService.save(noteToSave)
@@ -71,7 +108,7 @@ export function AddNote({ setNotes }) {
                 setIsExpanded(false)
             })
             .catch(err => {
-                console.log('Cannot save note:', err)
+                console.log('Cannot save video note:', err)
                 showErrorMsg('Cannot save note!')
             })
     }
@@ -106,12 +143,41 @@ export function AddNote({ setNotes }) {
                     />
                     {isExpanded && (
                         <div className="note-actions">
-                            <img src="../../assets/img/svgs/new-list.svg" alt="" className="btns-app" onClick={() => setNoteType('NoteTodo')}/>
+                            <img src="assets/img/svgs/new-list.svg" alt="" className="btns-app" onClick={() => setNoteType('NoteTodo')} />
+                            <img src="ssets/img/svgs/new-image.svg" alt="" className="btns-app" onClick={() => setNoteType('NoteVideo')} />
                             <button type="submit">Close</button>
                         </div>
                     )}
                 </form>
             )}
+            {noteType === 'NoteVideo'
+                && isExpanded
+                && (
+                    <form onSubmit={onSaveVideo}>
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            placeholder="Title"
+                            value={noteToEdit.info.title}
+                            onChange={handleTxtChange}
+                            className="note-title-input"
+                        />
+                        <input
+                            type="url"
+                            id="url"
+                            name="url"
+                            placeholder="Paste video URL"
+                            value={noteToEdit.info.url || ''}
+                            onChange={handleUrlChange}
+                            className="note-url-input"
+                        />
+                        <div className="note-actions">
+                            <img src="assets/img/svgs/new-image.svg" alt="" className="btns-app" onClick={() => setNoteType('NoteVideo')} />
+                            <button type="submit">Close</button>
+                        </div>
+                    </form>
+                )}
 
             {noteType === 'NoteTodo' && isExpanded && (
                 <form onSubmit={onSaveTodo}>

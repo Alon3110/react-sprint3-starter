@@ -17,7 +17,6 @@ function createEventEmitter() {
 
 export const eventBusService = createEventEmitter()
 
-// Functions for easily showing msgs
 export function showUserMsg(msg) {
     eventBusService.emit('show-user-msg', msg)
 }

@@ -1,7 +1,9 @@
 .note {
+    display: grid;
     position: relative;
     width: 100%;
     padding: 1rem;
+    margin-block-end: 1rem;
     border-radius: 0.5rem;
     outline: 1px solid var(--bg1);
 }
@@ -10,8 +12,21 @@
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
 
-.note h1, .note ul, .note p {
+.btn-note-bar {
+    display: flex;
+}
+
+.btn-note-bar .btns-app {
+    margin-inline-end: 1rem;
+}
+
+.note h1,
+.note ul {
     margin-block-end: 0.5rem;
+}
+
+.note p {
+    margin-block-end: 0.8rem;
 }
 
 .note li {
@@ -20,15 +35,47 @@
 
 .todos-list {
     margin-inline-start: 1rem;
+    margin-block-end: 1rem;
     list-style-type: circle;
 }
 
-.btns-app {
+.note .btns-app {
     height: 1.2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    border-radius: 50%;
 }
 
-.color-input{
+.note:hover .btns-app {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.note .pin-note {
+    position: absolute;
+    inset-inline-end: 1rem;
+    inset-block-start: 1rem;
+}
+
+.color-input {
     display: flex;
+    position: absolute;
+
+    height: 3rem;
+    padding: 5px;
+    border-radius: 0.7rem;
+    background-color: whitesmoke;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        0 8px 16px rgba(0, 0, 0, 0.1);
+
+    bottom: -37px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+
+    align-items: center;
 }
 
 .color-input .item {
@@ -38,8 +85,37 @@
     height: 1.5rem;
     width: 1.5rem;
     border-radius: 50%;
+    border: 1px solid rgba(48, 48, 48, 0.473);
 
     cursor: pointer;
     transition: .2s border-width;
     place-items: center;
+}
+
+.color-input .item:hover {
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.color-input .item.active {
+    border: 1px solid rgba(108, 52, 236, 0.863);
+}
+
+/* MAIN CONTENT */
+
+.note-image-container {
+    display: flex;
+    width: 150px;
+    height: 150px;
+    justify-content: center;
+}
+
+.note-image-container,
+.note-video {
+    margin-block-end: 1rem;
+    justify-self: center;
+    object-fit: contain;
+}
+
+.note-img {
+    justify-self: center;
 }

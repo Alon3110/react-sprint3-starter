@@ -4,3 +4,12 @@
     font-family: poppins;
     src: url(/assets/css/apps/mail/fonts/Poppins-Light.ttf);
 }
+@font-face {
+    font-family: googlesans;
+    src: url('/assets/fonts/googlesans/GoogleSansCode-Regular.ttf');
+}
+
+@font-face {
+    font-family: roboto;
+    src: url('/assets/fonts/roboto/Roboto-Regular.ttf');
+}
