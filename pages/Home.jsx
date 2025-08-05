@@ -13,7 +13,7 @@ export function Home() {
                     <span className="red">e</span></h1>
             </div>
             <div class="search-wrapper">
-                <div class="search-bar">
+                <div class="search-bar-home">
                     <span class="search-icon"><img src="../assets/img/svgs/search.svg" alt="" /></span>
                     <input type="text" placeholder="Search Google or type a URL" />
                 </div>

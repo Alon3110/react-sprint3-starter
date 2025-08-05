@@ -31,9 +31,9 @@
 
 @media (min-width: 900px) {
 
-    .container img {
-        width: 120px;
-        height: 40px;
+    .main-layout img {
+        width: 100px;
+        height: 100px;
     }
 
     .main-header {

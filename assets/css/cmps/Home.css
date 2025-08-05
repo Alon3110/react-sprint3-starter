@@ -51,7 +51,7 @@
     max-width: 600px;
 }
 
-.search-bar {
+.search-bar-home {
     display: flex;
     align-items: center;
     background-color: #fff;
@@ -62,11 +62,11 @@
     transition: box-shadow 0.2s ease;
 }
 
-.search-bar:hover {
+.search-bar-home:hover {
     box-shadow: 0 1px 8px rgba(32, 33, 36, 0.4);
 }
 
-.search-bar input {
+.search-bar-home input {
     flex: 1;
     border: none;
     outline: none;
