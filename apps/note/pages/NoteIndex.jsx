@@ -3,30 +3,30 @@ import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.servic
 import { NoteList } from "../cmps/NoteList.jsx"
 import { AddNote } from "../cmps/AddNote.jsx"
 import { NoteFilter } from "../cmps/NoteFilter.jsx"
-  import { Loader } from "../../../cmps/Loader.jsx"
-  
-  const { useState, useEffect } = React
-  
-  export function NoteIndex() {
-      
-      const [notes, setNotes] = useState(null)
-      const [isSearch, setIsSearch] = useState(false)
-      
-      useEffect(() => {
-          loadNotes()
-        }, [])
-        
-        function loadNotes() {
-            noteService.query()
+import { Loader } from "../../../cmps/Loader.jsx"
+
+const { useState, useEffect } = React
+
+export function NoteIndex() {
+
+    const [notes, setNotes] = useState(null)
+    const [isSearch, setIsSearch] = useState(false)
+
+    useEffect(() => {
+        loadNotes()
+    }, [])
+
+    function loadNotes() {
+        noteService.query()
             .then(notes => setNotes(notes))
             .catch(err => {
                 console.log('err:', err)
                 showErrorMsg('Cannot get notes!')
             })
-        }
-        
-        function onRemoveNote(noteId) {
-            noteService.remove(noteId)
+    }
+
+    function onRemoveNote(noteId) {
+        noteService.remove(noteId)
             .then(() => {
                 setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
                 showSuccessMsg(`Note removed successfully!`)
@@ -35,37 +35,42 @@ import { NoteFilter } from "../cmps/NoteFilter.jsx"
                 console.log('Error deleting note:', err)
                 showErrorMsg('Error deleting note!')
             })
-        }
-        
-        function onSetNoteColor(noteId, color) {
-            
+    }
+
+    function onSetNoteColor(noteId, color) {
+
         noteService.get(noteId)
-        .then(note => {
-            const updatedNote = {
-                ...note, style: {
-                    ...note.style, backgroundColor: color
+            .then(note => {
+                
+                const updatedNote = {
+                    ...note, style: {
+                        ...note.style, backgroundColor: color
                     }
                 }
-                return noteService.save(updatedNote)
-            })
-            .then(savedNote => {
+
                 setNotes(prevNotes =>
                     prevNotes.map(note =>
-                        note.id === savedNote.id ? savedNote : note
+                        note.id === updatedNote.id ? updatedNote : note
                     )
                 )
+
+                noteService.save(updatedNote)
+                    .catch(err => {
+                        console.log('Error saving color:', err)
+                        showErrorMsg('Error saving color!')
+                    })
             })
             .catch(err => {
                 console.log('Error changing color:', err)
                 showErrorMsg('Error changing color!')
             })
-        }
-        
-        function onToggleSearch() {
-            setIsSearch(prev => !prev)
-        }
-        
-        if (!notes) return <Loader />
+    }
+
+    function onToggleSearch() {
+        setIsSearch(prev => !prev)
+    }
+
+    if (!notes) return <Loader />
     return (
         <section className="note-index">
             <div className="upper-index-bars">

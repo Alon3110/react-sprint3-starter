@@ -12,9 +12,9 @@ export function Home() {
                     <span className="green">l</span>
                     <span className="red">e</span></h1>
             </div>
-            <div class="search-wrapper">
-                <div class="search-bar-home">
-                    <span class="search-icon"><img src="../assets/img/svgs/search.svg" alt="" /></span>
+            <div className="search-wrapper">
+                <div className="search-bar-home">
+                    <span className="search-icon"><img src="../assets/img/svgs/search.svg" alt="" /></span>
                     <input type="text" placeholder="Search Google or type a URL" />
                 </div>
             </div>

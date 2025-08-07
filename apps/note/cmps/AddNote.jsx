@@ -52,22 +52,14 @@ export function AddNote({ setNotes }) {
 
     // save functions:
 
-    function onSaveNote(ev) {
+        function onSaveNote(ev) {
         ev.preventDefault()
         if (!noteToEdit) return
 
         const noteToSave = { ...noteToEdit }
         noteToSave.createdAt = Date.now()
-        noteService.save(noteToSave)
-            .then(savedNote => {
-                setNotes(prevNotes => [savedNote, ...prevNotes])
-                resetNote()
-                setIsExpanded(false)
-            })
-            .catch(err => {
-                console.log('Cannot save note:', err)
-                showErrorMsg('Cannot save note!')
-            })
+
+        onSave(noteToSave)
     }
 
     function onSaveTodo(ev) {
@@ -80,27 +72,22 @@ export function AddNote({ setNotes }) {
         todoToSave.info.todos = todos
         todoToSave.createdAt = Date.now()
 
-        noteService.save(todoToSave)
-            .then(savedNote => {
-                setNotes(prevNotes => [savedNote, ...prevNotes])
-                resetNote()
-                setIsExpanded(false)
-            })
-            .catch(err => {
-                console.log('Cannot save todo note:', err)
-                showErrorMsg('Cannot save note!')
-            })
+        onSave(noteToSave)
     }
 
     function onSaveVideo(ev) {
         ev.preventDefault()
         if (!noteToEdit) return
         const emptyVideoNote = noteService.getEmptyNote('NoteVideo')
-        const noteToSave = { ...emptyVideoNote, ...noteToEdit}
+        const noteToSave = { ...emptyVideoNote, ...noteToEdit }
         // the next line is due to a type value bug:
         noteToSave.type = 'NoteVideo'
         noteToSave.createdAt = Date.now()
 
+        onSave(noteToSave)
+    }
+
+    function onSave(noteToSave) {
         noteService.save(noteToSave)
             .then(savedNote => {
                 setNotes(prevNotes => [savedNote, ...prevNotes])
